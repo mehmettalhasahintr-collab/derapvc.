@@ -6,7 +6,7 @@
     <title>DERA PVC</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0; padding: 0; background-color: #f4f4f9; color: #333; min-height: 100vh;
         }
         header {
@@ -933,7 +933,7 @@ Pencere ve kapılara özel ölçülerle üretilen plise, stor ve menteşeli sine
         
         <div style="flex: 2; min-width: 300px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
             <h3>Hızlı İletişim Formu</h3>
-            <form id="contactForm" action="https://script.google.com/macros/s/AKfycbzt5QFi5USj8Di4iKzXU3ByAiHiWxKOGTPJWR3pSptiXDI0UlC2bND3N_mO7dVd6h4iQA/exec" method="POST">
+            <form id="contactForm" >
                 
                 <div style="margin-bottom: 15px;">
                     <label for="name" style="display: block; margin-bottom: 5px; font-weight: bold;">Adınız Soyadınız:</label>
@@ -1294,5 +1294,47 @@ Pencere ve kapılara özel ölçülerle üretilen plise, stor ve menteşeli sine
 
         showContent('anasayfa');
     </script>
+
+
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Sayfanın Google'a gitmesini engeller
+
+    const form = e.target;
+    const statusText = document.getElementById('formStatus');
+    const submitButton = form.querySelector('button[type="submit"]');
+
+    // Kullanıcıya bilgi ver
+    submitButton.disabled = true;
+    statusText.innerText = "Mesajınız gönderiliyor...";
+    statusText.style.color = "blue";
+
+    // Form verilerini al
+    const formData = new FormData(form);
+    
+    // Google Script'e veriyi arka planda gönder (AJAX)
+    fetch('https://script.google.com/macros/s/AKfycbzt5QFi5USj8Di4iKzXU3ByAiHiWxKOGTPJWR3pSptiXDI0UlC2bND3N_mO7dVd6h4iQA/exec', {
+        method: 'POST',
+        mode: 'no-cors', // Google Apps Script için bu gereklidir
+        body: formData
+    })
+    .then(() => {
+        // Başarılı olduğunda
+        statusText.innerText = "Mesajınız başarıyla iletildi! Teşekkür ederiz.";
+        statusText.style.color = "green";
+        form.reset(); // Formu temizle
+        submitButton.disabled = false;
+    })
+    .catch(error => {
+        // Hata olduğunda
+        statusText.innerText = "Bir hata oluştu. Lütfen tekrar deneyin.";
+        statusText.style.color = "red";
+        submitButton.disabled = false;
+        console.error('Hata!', error);
+    });
+});
+</script>
+
+
 </body>
 </html>
