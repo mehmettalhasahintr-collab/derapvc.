@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DERA PVC</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; padding: 0; background-color: #f4f4f9; color: #333; min-height: 100vh;
+        }
+        header {
+            background-color: #ffffff; padding: 20px; display: flex; justify-content: space-between;
+            align-items: center; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); position: relative;
+        }
+        #mainLogo { max-width: 200px; height: auto; margin: 0; cursor: pointer; }
+
+        .menu-toggle {
+            font-size: 30px; cursor: pointer; color: #333; background: none; border: none;
+            padding: 5px; position: absolute; top: 20px; right: 20px; z-index: 1000;
+        }
+
+        .dropdown-menu {
+            display: none; position: absolute; top: 75px; right: 0; background-color: #333;
+            width: 250px; z-index: 999; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            border-radius: 5px; list-style-type: none; padding: 0; margin: 0; text-align: left;
+        }
+
+        .dropdown-menu.active { display: block; }
+
+
+
+        .dropdown-menu li {
+            position: relative;
+        }
+        .dropdown-menu li a {
+            color: white; padding: 12px 16px; text-decoration: none; display: block;
+            border-bottom: 1px solid #444; transition: background-color 0.3s;
+        }
+        .dropdown-menu li a:hover { background-color: #4CAF50; }
+
+        .menu-bee-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 16px;
+        }
+        .menu-bee-logo img {
+            max-width: 100%;
+            height: auto;
+            max-height: 40px;
+         }
+        .menu-bee-logo:hover {
+             background-color: #4CAF50;
+        }
+
+        .sub-menu {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 100%;
+             background-color: #444;
+             min-width: 200px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            border-radius: 5px;
+            z-index: 1000;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+
+
+        .dropdown-menu.active li:hover > .sub-menu,
+        .dropdown-menu.active li.submenu-active > .sub-menu {
+            display: block;
+        }
+
+
+
+        .content-section {
+            display: none;
+        }
+        .content-section.home-active {
+            display: block;
+        }
+
+        .slider-container {
+            position: relative; width: 90%; max-width: 1200px; margin: 30px auto;
+            overflow: hidden; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); border-radius: 10px;
+        }
+        .slider-item {
+            display: none; width: 100%; height: 400px; background-size: cover;
+            background-position: center; position: relative; animation: fadeIn 1s;
+        }
+        .slider-item.active { display: block; }
+         .logo-section {
+            display: flex; justify-content: center; align-items: center;
+            flex-wrap: wrap; padding: 30px 20px; gap: 40px;
+             background-color: #ffffff;
+            margin: 30px auto;
+            max-width: 1200px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .logo-section img { max-width: 180px; height: auto; opacity: 0.8; transition: opacity 0.3s ease-in-out; }
+        .logo-section img:hover { opacity: 1; }
+
+
+        .about-section {
+            padding: 50px 20px;
+            max-width: 1000px;
+            margin: 50px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        .about-section h2 {
+            text-align: center; color: #007bff; font-size: 2.5em; margin-bottom: 30px;
+        }
+        .about-section h3 {
+             color: #4CAF50;
+              margin-top: 30px;
+              border-bottom: 2px solid #eee;
+              padding-bottom: 10px;
+        }
+        .about-section p {
+            line-height: 1.8; color: #555; margin-bottom: 20px; text-align: justify;
+        }
+
+
+
+        .product-nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ddd;
+        }
+        .product-nav button {
+            background-color: transparent;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1.1em;
+            color: #555;
+            transition: color 0.3s, border-bottom 0.3s;
+            margin: 0 5px;
+            margin-bottom: -2px; 
+            white-space: nowrap;
+        }
+        .product-nav button.active {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            font-weight: bold;
+        }
+
+        .product-sub-category {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 10px 0;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .product-sub-category button {
+            background-color: #eee;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 0.95em;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .product-sub-category button:hover {
+            background-color: #ddd;
+        }
+        .product-sub-category button.active {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+            font-weight: bold;
+        }
+
+
+
+        .product-content-area {
+            min-height: 300px;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .series-content-details {
+            display: flex;
+            align-items: flex-start; 
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            gap: 20px;
+            text-align: left; 
+        }
+        .series-content-details:nth-child(even) { 
+            flex-direction: row-reverse;
+        }
+        .series-content-details h3 {
+            color: #cc0000; 
+            font-size: 2.2em;
+            margin-top: 0;
+            border: none;
+        }
+        .series-content-details .product-series-image {
+            flex-basis: 40%; 
+            min-width: 300px;
+            background-color: #cc0000; 
+            padding: 20px 0;
+            border-radius: 5px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .series-content-details .product-series-image img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        .series-content-details .product-series-text {
+            flex-basis: 60%; 
+        }
+        .series-content-details .product-series-text ul {
+            list-style: none;
+            padding: 0;
+        }
+        .series-content-details .product-series-text ul li {
+            margin-bottom: 15px;
+            padding-left: 15px;
+            position: relative;
+            line-height: 1.6;
+            color: #555;
+        }
+        .series-content-details .product-series-text ul li::before {
+            content: '•';
+             color: #007bff; 
+            font-weight: bold;
+             display: inline-block;
+             width: 1em;
+            margin-left: -1em;
+        }
+
+        .series-content-details .tagline {
+            font-weight: bold;
+            color: #4CAF50;
+            font-size: 1.2em;
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+
+
+        #news-list-container {
+            border-right: 1px solid #eee;
+            padding-right: 20px;
+            margin-right: 20px;
+            min-width: 300px;
+        }
+
+        .news-item-title {
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            font-weight: bold;
+            color: #333;
+            text-align: left;
+        }
+
+        .news-item-title:hover {
+            background-color: #eef;
+            border-color: #007bff;
+            color: #007bff;
+        }
+
+        .news-detail {
+            display: none;
+            padding: 20px;
+            border: 1px solid #007bff;
+            border-radius: 8px;
+            background-color: #fff;
+            text-align: left;
+        }
+        .news-detail.active {
+            display: block;
+        }
+        .news-detail h3 {
+            color: #cc0000;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .news-detail .news-image-placeholder {
+            min-height: 200px;
+            background-color: #ccc;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #666;
+            font-style: italic;
+            border-radius: 5px;
+        }
+
+
+        @media (max-width: 768px) {
+            .logo-section { flex-direction: column; gap: 20px; }
+            .logo-section img { max-width: 150px; }
+
+            .product-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            .product-nav button {
+                width: 90%;
+                margin: 5px 0;
+                border-bottom: none;
+            }
+            .product-nav button.active {
+                border-bottom: none;
+                background-color: #f0f0f0;
+                border-radius: 5px;
+            }
+            .product-sub-category {
+                flex-direction: column;
+            }
+            .product-sub-category button {
+                 width: 90%;
+            }
+
+
+
+            .series-content-details, .series-content-details:nth-child(even) {
+                flex-direction: column;
+                align-items: center;
+            }
+            .series-content-details .product-series-image {
+                min-width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .sub-menu {
+                position: static;
+                width: 100%;
+                left: 0;
+            }
+
+            #haberler-content-wrapper {
+                 flex-direction: column;
+            }
+            #news-list-container {
+                border-right: none;
+                padding-right: 0;
+                margin-right: 0;
+                min-width: unset;
+                width: 100%;
+                border-bottom: 1px solid #eee;
+                margin-bottom: 20px;
+            }
+            #news-detail-container {
+                width: 100%;
+            }
+        }
+         footer {
+            background-color: #333; color: white; text-align: center; padding: 20px;
+            font-size: 0.9em; margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://derapvc.com.tr/tema/dera/img/logo.png" alt="DERA PVC Logo" id="mainLogo" onclick="showContent('anasayfa')">
+        <button class="menu-toggle" id="menuToggle">&#9776;</button>
+        <ul class="dropdown-menu" id="dropdownMenu">
+            <li id="firma-profili-li">
+                <a href="#" onclick="showContent('hakkimizda'); return false;">Firma Profili &#9658;</a>
+                <ul class="sub-menu">
+                    <li><a href="#" onclick="showContent('hakkimizda'); return false;">Hakkımızda</a></li>
+                    <li><a href="#" onclick="showContent('hakkimizda'); return false;">Misyon ve Vizyon</a></li>
+                </ul>
+            </li>
+            <li><a href="#" onclick="showContent('urunler'); showProductCategory('pvc'); return false;">Ürünler</a></li>
+            <li><a href="#" onclick="showContent('haberler'); showNewsDetail('haber1'); return false;">Haberler</a></li>
+            <li><a href="#" onclick="showContent('referanslar'); return false;">Referanslarımız</a></li>
+            <li><a href="#" onclick="showContent('bayiler'); return false;">Bayilerimiz</a></li>
+            <li><a href="#" onclick="showContent('iletisim'); return false;">İletişim</a></li>
+
+                </a>
+            </li>
+        </ul>
+    </header>
+    <div id="anasayfa" class="content-section home-active">
+
+        <div class="slider-container">
+            <div class="slider-item" style="background-image: url('https://www.derapvc.com.tr/user/files/72154.jpg');"></div>
+            <div class="slider-item" style="background-image: url('https://www.derapvc.com.tr/user/files/164936.jpg');"></div>
+            <div class="slider-item" style="background-image: url('https://www.derapvc.com.tr/user/files/72156.jpg');"></div>
+            <div class="slider-item" style="background-image: url('https://www.derapvc.com.tr/user/files/165002.jpg');"></div>
+            <div class="slider-item" style="background-image: url('https://www.derapvc.com.tr/user/files/164924.jpg');"></div>
+             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <div class="logo-section">
+            <img src="https://sadecesineklik.com/files/logo/3ab97ee3-6819-4c67-911a-0b6031ec4379.png?width=240&height=180&mode=boxpad" alt="Dera Logo">
+            <img src="https://www.derapvc.com.tr/tema/dera/img/konig.png" alt="Konig Logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9LcWiyFE7tPwEsagHSYwyj_8wqGJfgmHGg&s" alt="Door-A Logo">
+        </div>
+    </div>
+    <section id="hakkimizda" class="content-section about-section">
+        <h2>Hakkımızda</h2>
+        <p>
+            Dera Pvc Dış Ticaret Yapı Ltd. Şti. **08 Şubat 2012** tarihinde, Kayseri Ambar Sanayi Bölgesinde 1000 m2 açık, 750 m2 kapalı alanda Pvc Kapı ve Pencere Hazır Doğrama imalatına başlamıştır.
+        </p>
+        <p>
+            Kuruluşunun 7.yılında **KÖNİG** markası ile kendi adına profil çektirmeye başlayan firmamız sadece hazır doğrama konusunda değil; Diyarbakır'da kurulu ve bünyesinde bulunan Sandwich Panel Fabrikasında üretimini yapmakta olduğu Sandwich ve Dekoratif Kapı Panelleri Satışı konusunda da hizmet vermektedir.
+        </p>
+        <p>
+            Dera Pvc yine **2013 yılı başında** Kayseri şehir merkezinde oluşturduğu ve üretimini yaptığı ürünler dışında Panjur ve Garaj kapısı sistemleri, Cam Balkon sistemleri ve Duşakabin satışını da yapacağı son derece modern ve geniş **Showroomu** ile çok büyük bir sıçrama gerçekleştirmiştir.
+        </p>
+        <p>
+            Dera PVC 2012 ve 2013 yıllarında 1-2 tırla ihracatla başladığı Yurt dışı satışlarını, **2019 yılında** Afrika Ülkeleri, İspanya ve Balkan ülkelerine yoğun bir şekilde ihracat yaparak yıllık tır sayısını **50 tıra çıkartmıştır**. Bu ülkelerin yanı sıra hem bu bölgeye hem de dünyanın diğer bölgelerine ihracat yapmayı hedeflemektedir.
+        </p>
+        <p>
+            Sektörün önde gelen makine firmalarından Murat Makine tarafından üretilmiş olan, Tamamen **Robot Teknolojisi** ile günlük, 120 adet pencere kapasitesine sahip makineler ve bu makineleri son derece profesyonelce kullanan toplamda **25 kişilik kalifiye bir ekip** ile çalışan firmamızın tek hedefi, sorunsuz hizmet ve müşteri memnuniyetidir.
+        </p>
+        <p>
+            Bizler biliyoruz ki sektörümüzün bizim tarzımızdaki imalatçı ve Uygulayıcı firmalardan talepleri; anında ve sorunsuz hizmet; kaliteli, aynı zamanda uygun fiyatlı ürünleri sektöre arz etmektir. Öncelikli hedefimiz, tamamen Avrupa normlarına uygun; CE etiketli, **TSE ve Alman Ral Standartlarına** sahip ürünleri ile **“KALİTELİ ÜRÜN- MUTLU MÜŞTERİ”** sloganını sürdürmektir.
+        </p>
+
+        <hr style="margin: 40px 0; border: 0; border-top: 1px solid #ddd;">
+        <h2>Misyon ve Vizyon</h2>
+        <h3>Vizyonumuz</h3>
+        <p>
+            Kaynakları en verimli şekilde kullanarak toplum ihtiyaçlarını önceden görüp karşılamaya odaklanmış; üstün hizmet ve ürün kalitesiyle güçlü bir marka imajına sahip; topluma, çalışanlarına ve doğaya karşı sorumluluklarını yerine getiren, saygın, birçok konuda öncü, itibarlı; öncelikle vatanının sonrasında insanlığın refahına ve gelişimine katkıda bulunabilen evrensel ölçülerde, kurumsal, nesilden nesile aktarılacak **sonsuz ömürlü bir kuruluş olmak.**
+        </p>
+        <h3>Misyonumuz</h3>
+        <p>
+            Değişim ve gelişime açık; güvenilir ve sürekli kendini geliştiren; araştırmacı ve yenilikçi, esnek, hızlı ve çevik yapısıyla dengeleri değiştirebilen ve kriterleri belirleyen; müşteri beklenti ve memnuniyetine önem veren; sattığı ürün ve hizmete satış sonrasında da sahip çıkarak sonuna kadar tam destek veren; devamlı ve sağlıklı büyüyerek, araştırma ve maliyet düşürücü projelerle rekabet gücünü sürekli geliştiren; müşterileri, tedarikçileri, sermaye sahipleri, diğer iş ortakları ve en önemlisi de çalışanları ile bir ekip ruhuyla yüksek katma değer oluşturarak bunun adil paylaşımına önem veren; pazarın tüm dünya olduğu bilinciyle hareket eden; uluslararası standartlarda daima aranılan ürün ve hizmet sunmayı kendisine prensip edinmiş; iyi eğitilmiş, tam donanımlı, yetenekli, katılımcı ve üst düzeyde motive olmuş çalışanlara sahip **bir firma olmak.**
+        </p>
+    </section>
+    <section id="urunler" class="content-section about-section">
+        <h2>Ürünlerimiz</h2>
+
+        <nav class="product-nav" id="productCategoryNav">
+            <button id="pvcButton" class="active" onclick="showProductCategory('pvc')">PVC Kapı Pencere Sistemleri</button>
+            <button id="alternativeButton" onclick="showProductCategory('alternative')">Alternatif Sistemler</button>
+        </nav>
+        <div id="pvc-systems" class="product-category active">
+
+            <nav class="product-sub-category" id="pvcSubNav">
+                <button id="pro7006Button" class="active" onclick="showProductSeries('pro7006')">PRO7006</button>
+                <button id="pro8106Button" onclick="showProductSeries('pro8106')">PRO8106</button>
+                <button id="konigButton" onclick="showProductSeries('konig')">König Seri</button>
+                <button id="newSlidingButton" onclick="showProductSeries('newSliding')">Yeni Sürme</button>
+            </nav>
+
+            <div class="product-content-area" id="pvc-content-area">
+
+                <div id="pro7006" class="product-series-content active">
+                    <h3>PRO7006 SERİSİ (ULTRA SERİ)</h3>
+                    <div class="series-content-details">
+                        <div class="product-series-image">
+                            <img src="https://www.derapvc.com.tr/user/files/178896.PNG" alt="PRO7006 PVC Profil Kesiti">
+                        </div>
+                        <div class="product-series-text">
+                            <p class="tagline">TASARRUF İÇİN İDEAL...</p>
+                            <ul>
+                                <li>**6 Odacıklı** profil yapısı ve **48 mm'lik Yüksek kasası** ile **7 Odacıklı Damlalıklı** sistemi mükemmel bir şekilde birleştirir.</li>
+                                <li>**70 mm kasa genişliği** ile dünya standartlarında gerçekleşen üretimi sayesinde kalite çıtasını yükselten başarılı çözümler sunar.</li>
+                                <li>Hem Türkiye'nin hem dünyanın tercih ettiği bu seri, özel olarak tasarlanmıştır ve her mekan ile mimari detaya uyum sağlar.</li>
+                                <li>Yan profilleri ile tüm nokta detayları çözülmüş olup, pivot pencereleri dünyadaki tüm aksesuarlar ile uyumludur.</li>
+                                <li>Su akış eğimi ve özel contaları sayesinde **%100 su sızmasını engellerken** aynı zamanda mükemmel bir **ses izolasyonu** sağlar.</li>
+                                <li>Cam üzerine taşmayan, görüş alanına girmeyen, yeni tasarım conta sistemi sayesinde evinizde mükemmel izolasyon sağlayarak ilk günden itibaren ev ekonominize büyük katkıda bulunur.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pro8106" class="product-series-content" style="display:none;">
+                    <h3>PRO8106 SERİSİ (SAFİR SERİ)</h3>
+                    <div class="series-content-details">
+                        <div class="product-series-image">
+                            <img src="https://www.derapvc.com.tr/user/files/178897.png" alt="PRO8106 PVC Profil Kesiti">
+                        </div>
+                        <div class="product-series-text">
+                            <p class="tagline">SARAYLARA LAYIK TASARIM...</p>
+                            <ul>
+                                <li>PVC pencere sektöründe gelişen dünya standartlarına uyum doğrultusunda tasarlanmış ve hem Türkiye'de hem de dünyada tercih edilmektedir.</li>
+                                <li>**Gerçek Bariyerli 3 contalı** sistemi sayesinde yüksek izolasyon özelliği ile ön plana çıkmakta olup, su sızdırmazlığı mükemmel hale gelmiştir.</li>
+                                <li>**3 mm et kalınlığına sahip 81 mm kasa genişliği** ile buna uygun Düz kanat ve rijit bir orta kayıt profili ile desteklenmiştir.</li>
+                                <li>Tüm profiller **6 odacıklı** olup, her iç ve dış mekan detaya uygundur.</li>
+                                <li>Geniş hacimli pencereler oluşturabilme özelliği sayesinde, dış pazardaki payımızı artırmak ve yurt içindeki çıtamızı yükseltmek için dizayn edilmiştir.</li>
+                                <li>Görüntüyü bozmayan conta sistemi sayesinde eviniz için maksimum izolasyon sağlar.</li>
+                                <li>**128 mm'lik kasa kanat yüksekliği** ile eviniz daha aydınlık görünür ve dışarıyı doya doya seyretmenin keyfini çıkarırsınız.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="konig" class="product-series-content" style="display:none;">
+                    <h3>KÖNİG SERİ</h3>
+                    <div class="series-content-details">
+                        <div class="product-series-image">
+                            <img src="https://www.derapvc.com.tr/user/files/164728.png" alt="König PVC Profil Kesiti">
+                            <h4 style="color:white; margin-top: 10px;">König Seri</h4>
+                        </div>
+                        <div class="product-series-text">
+                            <p class="tagline">BÜYÜK HAYALLERDEN DOĞAN, YENİ FİKİRLER</p>
+                            <p style="margin-bottom: 25px;">
+                                Geleceği bugünden gören yeni nesil seri Dera'dan; daha fazla koruma, daha fazla ekonomi, çok daha fazla direnç isteyenler için **6 odacıklı ve 3 contalı kasa profili**, **6 odacıklı damlalıklı kanat profili** güvenli ve estetik bir çözüm sunar. Yeni König Seri, geleceğin pencere profilleridir.
+                            </p>
+
+
+                            <h4 style="color: #007bff; margin-bottom: 15px;">TEKNİK ÖZELLİKLER</h4>
+                            <ul>
+                                <li>**80 mm profil genişliği**, **6 odacıklı kasa profili** ve **3 mm profil et kalınlığı** ile üstün yapısal dayanıklılık.</li>
+                                <li>**6 odacıklı damlalıklı kanat profili** sayesinde su tahliyesi ve yalıtımda mükemmellik.</li>
+                                <li>**3 contalı sistem** ile elde edilen mükemmel ısı ve ses izolasyonu.</li>
+                                <li>**30 mm’ye kadar çift ve üç cam** uygulayabilme olanağı.</li>
+                                <li>Yalnızca **1,2 - 1,3 w/m²k** ısı geçirgenlik değeri ile yüksek enerji tasarrufu.</li>
+                                <li>Tüm detay çözümleri için zengin yardımcı profil çeşidi.</li>
+                                <li>RAL standartlarına uygun **hot melt (sıcak yapıştırma) lamine kaplama** tekniği ile zengin renk alternatifleri.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="newSliding" class="product-series-content" style="display:none;">
+                    <h3>YENİ SÜRME SİSTEMLERİ</h3>
+                    <div class="series-content-details">
+                        <div class="product-series-image">
+                            <img src="https://www.derapvc.com.tr/user/files/69090.jpg" alt="Sürme Sistemleri Kesiti">
+                            <h4 style="color:white; margin-top: 10px;">Yeni Sürme</h4>
+                        </div>
+                        <div class="product-series-text">
+                            <p class="tagline">"Sorun varsa çözümü de vardır" deyişine güzel bir örnek; Sürme Serileri...</p>
+                            <p style="margin-bottom: 25px;">
+                                Normal açılımlara olanak vermeyen mekanlar için üretilen Sürme Serileri, daha fazla hareket özgürlüğü isteyenler için eşsiz bir ürün.
+                            </p>
+                            
+                            <h4>SINIRLI MEKANLARDA PAKPEN RAHATLIĞI</h4>
+                            <p>
+                                Binaların kendi özel yaşamlarının olması gerçeğini kabul eden Pakpen'in ileri teknolojisiyle şekil bulan Sürme Serileri balkon, teras ve konut içi uygulamaları için gerçekleştirilen, tüm detay sorunlarını ortadan kaldıran, yerden tasarruf sağlayan dekoratif ve pratik bir seridir. Serileri'nin, ön odacıkları mükemmel su tahliyesi. Çift kanatlı, eşikli tek raylı Sürme Seri'de olası rüzgarlardan kaynaklanan kontrolsüz kapanma sorunu ve buna bağlı olarak oluşan perde deformasyonlarının önü tamamıyla kesilmiştir. İsteğe bağlı, ahşap desenli folyo kaplama ile renklendirilen Sürme seri, ideal yapılara gerçeklik kazandırabilecek bir özelliğe sahiptir. Çift ve tek raylı sistemlerde yardımcı serilerle beraber Optimal ve Rival Seri uygulamaları yapılabilir.
+                            </p>
+                            
+                            <h4 style="color: #007bff; margin-bottom: 15px;">TEKNİK ÖZELLİKLER</h4>
+                            <ul>
+                                <li>**3 mm profil et kalınlığı**</li>
+                                <li>Tek ve çift cam uygulamalarına imkan veren sistem</li>
+                                <li>Eşikli tek ray ve çift ray sistemleri</li>
+                                <li>Çift kanat uygulanabilme özelliği</li>
+                                <li>Zengin aksesuar seçenekleri ile sağlıklı hareket imkanı</li>
+                                <li>Özel **fırça contaları** ile izolasyon</li>
+                                <li>RAL standartlarına uygun **hot melt (sıcak yapıştırma) lamine kaplama** tekniği ile zengin renk alternatifleri</li>
+                                <li>Teras, balkon ya da konut içi uygulanma alternatifleri</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="alternative-systems" class="product-category" style="display:none;">
+            <nav class="product-sub-category" id="alternativeSubNav">
+                <button id="panjurButton" class="active" onclick="showAlternativeSeries('panjur')">Panjur</button>
+                <button id="cambalkonButton" onclick="showAlternativeSeries('cambalkon')">Cam Balkon</button>
+                <button id="sineklikButton" onclick="showAlternativeSeries('sineklik')">Sineklik</button>
+            </nav>
+
+            <div class="product-content-area" id="alternative-content-area">
+
+                <div id="panjur" class="alternative-series-content active">
+                    <h3>PANJUR SİSTEMLERİ</h3>
+                    <div class="series-content-details" style="flex-direction: column; align-items: center; text-align: left;">
+                         <p>
+                            Manuel ve otomatik kumandalı **Panjur** hareketli ve sabit lamelli kepenk ile Dera, mekanlarda dıştan içe korumanın estetiğini sunmaktadır.
+                        </p>
+                        
+                        <h4 style="color: #007bff; margin-bottom: 15px;">TEKNİK ÖZELLİKLER</h4>
+                        <ul>
+                            <li>**Tüm Dera Serilerine uygulanabilirlik**</li>
+                            <li>Manuel ve kumandalı kullanabilme imkanı</li>
+                            <li>**Açılabilir Panjur kutusu** sayesinde temizlenebilme imkanı</li>
+                            <li>Ahşap desen laminasyon ve **zengin renk seçenekleri**</li>
+                            <li>Tam donanımlı Pakpen Laboratuarlarında gerçekleştirilen testlerle kanıtlanmış, zorlu koşullara karşı **mükemmel dayanıklılık**</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="cambalkon" class="alternative-series-content" style="display:none;">
+                    <h3>CAM BALKON SİSTEMLERİ</h3>
+                    <div class="series-content-details" style="flex-direction: column; align-items: center;">
+                        <p>DeraPVC Cam Balkon Sistemleri, yaşam alanlarınızı dört mevsim konforla buluşturur. Isı ve ses yalıtımı sağlayan modern cam balkon çözümlerimiz, balkonlarınızı estetik, güvenli ve kullanışlı alanlara dönüştürür.
+
+Yüksek kaliteli alüminyum profiller ve temperli camlar sayesinde uzun ömürlü kullanım sunar. Katlanır ve sürgülü sistem seçenekleriyle mekâna özel çözümler üretirken, kolay temizlenebilir yapısı ile pratiklik sağlar.
+
+Şık tasarımı, sağlam yapısı ve kusursuz işçiliğiyle DeraPVC Cam Balkon, evinizin değerini artırırken dış etkenlere karşı maksimum koruma sağlar.</p>
+                        <p style="color: #007bff; font-weight: bold;">Lütfen güncel bilgi ve fiyatlar için bizimle iletişime geçin.</p>
+                    </div>
+                </div>
+
+                <div id="sineklik" class="alternative-series-content" style="display:none;">
+                    <h3>SİNEKLİK SİSTEMLERİ</h3>
+                    <div class="series-content-details" style="flex-direction: column; align-items: center;">
+                        <p>DeraPVC Sineklik Sistemleri, yaşam alanlarınızı sinek ve haşerelere karşı etkili şekilde korurken temiz havanın keyfini çıkarmanızı sağlar. Dayanıklı alüminyum profiller ve kaliteli file yapısı sayesinde uzun ömürlü ve güvenli kullanım sunar.
+
+Pencere ve kapılara özel ölçülerle üretilen plise, stor ve menteşeli sineklik seçenekleri; estetik tasarımıyla mekâna uyum sağlar ve kolay kullanımıyla günlük hayatınızı pratikleştirir.
+
+Şık görünüm, sağlam yapı ve profesyonel işçilikle DeraPVC Sineklik, evinizde konforu artırır.</p>
+                        <p style="color: #007bff; font-weight: bold;">Lütfen güncel bilgi ve fiyatlar için bizimle iletişime geçin.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="kalite" class="content-section about-section"><h2>Kalite (İçerik Eklenecek)</h2></section>
+    
+    <section id="haberler" class="content-section about-section">
+        <h2>Haberler</h2>
+        
+        <div id="haberler-content-wrapper" style="display: flex; gap: 20px; align-items: flex-start;">
+            
+            <div id="news-list-container">
+                <div class="news-item-title" onclick="showNewsDetail('haber1')">2023 Yılında Lions Life Firmasının Yıldırım Konağı-4 ü Teslim ettik.</div>
+                <div class="news-item-title" onclick="showNewsDetail('haber2')">2023 Yılında Lions Life Firmasını Yaptığı 22 Adet Villa İnşattını Teslim Ettik.</div>
+                <div class="news-item-title" onclick="showNewsDetail('haber3')">2024 Yılında Necdet Yıldırım İnşaatin Yüşbaşıoğulları İçin Yaptığı Gesi villası</div>
+                <div class="news-item-title" onclick="showNewsDetail('haber4')">2024 Yılında Zek İnşaatın Sivas Caddesindeki İpek saray Arkası Projesini yaptık.</div>
+                <div class="news-item-title" onclick="showNewsDetail('haber5')">2023 Yılında Zek İnşaatın Sivas Caddesindeki Zek Premiumu Yaptık Ve Teslim ettik</div>
+                <div class="news-item-title" onclick="showNewsDetail('haber6')">Dera PVC 2022 yıl başında DeraBee Markası ile üretimine başladığı Termo kovanlar ve 2024 Yılında İç ve Dış ticaret için kurmuş olduğu König İç ve Dış Tic.Ltd.Şti. İle Grup olma yolunda ilerlemeye devam ediyor.</div>
+
+                </div>
+            
+            <div id="news-detail-container" style="flex-grow: 1;">
+                
+                <div id="haber1" class="news-detail active">
+                    <h3>2023 Yılında Lions Life Firmasının Yıldırım Konağı-4 ü Teslim ettik</h3>
+                    <div class="news-image-placeholder">
+                    <img src="https://www.derapvc.com.tr/user/files/178926.png" alt="Haber">
+                    </div>
+                    <p>
+                        **2023 Yılında Lions Life Firmasının Yıldırım Konağı-4 ü Teslim ettik**, bu projede **König 70 lik Antrasit gri Pervazlı Kasa ve sinerji cam** uygulaması yaptık.
+                    </p>
+                </div>
+                
+
+                <div id="haber2" class="news-detail">
+                    <h3>2023 Yılında Lions Life Firmasını Yaptığı 22 Adet Villa İnşattını Teslim Ettik</h3>
+                    <div class="news-image-placeholder">
+                    <img src="https://www.derapvc.com.tr/user/files/178925.png" alt="Haber">
+                    </div>
+                    <p>
+                        **2023 Yılında Lions Life Firmasını Yaptığı 22 Adet Villa İnşattını Teslim Ettik**, bu projede **König 70 lik pervazlı kasa ve sinerji cam** uygulaması yaptık.
+                    </p>
+                </div>
+
+                <div id="haber3" class="news-detail">
+                    <h3>2024 Yılında Necdet Yıldırım İnşaatin Yüşbaşıoğulları İçin Yaptığı Gesi villası</h3>
+                    <div class="news-image-placeholder">
+                    <img src="https://www.derapvc.com.tr/user/files/178924.png" alt="Haber">
+                    </div>
+                    <p>
+                        2024 Yılında Necdet Yıldırım İnşaatin Yüşbaşıoğulları İçin Yaptığı Gesi villası
+                    2024 Yılında Necdet Yıldırım İnşaatin Yüşbaşıoğulları İçin Yaptığı Gesi villası, bu projede yalıtımlı sürme Legent ve König Antrasit gri pervazlı sistem uygulandı.
+                    </p>
+                </div>
+
+                <div id="haber4" class="news-detail">
+                    <h3>2024 Yılında Zek İnşaatın Sivas Caddesindeki İpek saray Arkası Projesini yaptık.</h3>
+                    <div class="news-image-placeholder">
+                    <img src="https://www.derapvc.com.tr/user/files/178921.png" alt="Haber">
+                    </div>
+                    <p>
+                        2024 Yılında Zek İnşaatın Sivas Caddesindeki İpek saray Arkası Projesini yaptık. Burada 4 bloktan oluşan projenin 1.bloğunu bitirdik şimdi diğer 3 bloğuda tamamlayarak projeyi Zek inşaata teslim edeceğiz. Bunun 2 bloğunda 70 lik yüksek kasa uygulanmakta ve diğer 2 blok ta ise sivas caddesinde uyguladığımız 81 lik seri gerçek 3 contalı, 6 cm lik geniş pervazlı pervazlı kasalı sistemi uygulayacağız.
+                    </p>
+                 </div>
+
+                 <div id="haber5" class="news-detail">
+                    <h3>2023 Yılında Zek İnşaatın Sivas Caddesindeki Zek Premiumu Yaptık Ve Teslim ettik.</h3>
+                    <div class="news-image-placeholder">
+                    <img src="https://www.derapvc.com.tr/user/files/178919.png" alt="Haber">
+                    </div>
+                    <p>
+                        2022 Yılında Zek İnşaatın Sivas Caddesindeki Zek Premiumu Yaptık Ve Teslim ettik, Bu projede Türkiyedeki serilerde pek olmayan daha çok ithal profillerde bulunan Plastik bariyerli gerçek gerçek 3 contalı mükemmel yalıtım ve sızdırmazlık sağlayan 81 seri 6 cm lik pervazlı kasalı sistem uyguladık ve gerçekten mükemmel yalıtım sağladık. 
+                    </p>
+                 </div>
+
+                 <div id="haber6" class="news-detail">
+                    <h3>Dera PVC 2022 yıl başında DeraBee Markası ile üretimine başladığı Termo kovanlar ve 2024 Yılında İç ve Dış ticaret için kurmuş olduğu König İç ve Dış Tic.Ltd.Şti. İle Grup olma yolunda ilerlemeye devam ediyor.</h3>
+                    <div class="news-image-placeholder">
+                    <img src="https://www.derapvc.com.tr/user/files/178885.jpg" alt="Haber">
+                    </div>
+                    <p>
+                    Dera PVC 2022 yıl başında DeraBee Markası ile üretimine başladığı Dış duvarları Sandwich Panel, yani içi ve dışı PVC yada Dışı PVC içi Ahşaplı olarak üretilmiş olan Konutların mantolama mantığı ile yazın sıcağa kartşı kışın ise soğuğa karşı yüksek yalıtım sağlayan bu sistemden, iskelet sistemi Köşeler, yani kolonlar alüminyum kirişler ise paslanmaz sacda oluşan, kapak yalıtımlı plastik taban ise uçuş tahtalı ve polen tuzaklı plastik tabandan oluşan bu termo kovan ahşap kovanlara göre arı gelişimi ve dolayısı ile bal veriminde %35-40 daha verimli olduğu kanıtlanmış 10 Çıtalık Kapasiteye sahip mükemmel bir Termo kovanüretmeye başlamıştır ve 2024 Yılında PVC Üretiminin büyük kısmını ihracat yapmakta olduğu hatta kendi sektöründe kayseride lig lideri olduğu için bu ihracat faaliyetlerini ve diğer ürünlerin ihracatını yapmak için kurmuş olduğu König İç ve Dış Tic.Ltd.Şti. İle Grup olma yolunda ilerlemeye devam ediyor. 
+                    </p>
+                 </div>
+                
+                </div>
+        </div>
+    </section>
+<section id="referanslar" class="content-section about-section references-custom-design">
+    
+    <h2 class="section-title">Değerli Referanslarımız</h2>
+    <p class="section-description">Projelerimizde güvenle çalıştığımız seçkin iş ortaklarımız.</p>
+
+    <div class="references-grid"> 
+        
+        <div class="reference-item">
+            <img src="https://files.sikayetvar.com/lg/cmp/21/210742.png?1744363408" class="reference-logo">
+            <h3>Lion's Life Yapı</h3>
+            <p class="project-info">PVC Pencere Tedariği ve Montajı</p>
+            <p class="description-text">Büyük çaplı konut projesinde A'dan Z'ye tüm PVC sistemlerinin tedarik ve kurulumu gerçekleştirilmiştir.</p>
+        </div>
+
+        <div class="reference-item">
+            <img src="https://www.derapvc.com.tr/tema/dera/img/konig.png" class="reference-logo">
+            <h3>König</h3>
+            <p class="project-info">İhracat</p>
+            <p class="description-text">Yurt dışına tırlarla König Marka Doğramalar İhraç edilmiştir.</p>
+        </div>
+        
+        <div class="reference-item">
+            <img src="https://files.sikayetvar.com/lg/cmp/22/225729.png?1685450901" class="reference-logo">
+            <h3>ZEK Yapı İnşaat</h3>
+            <p class="project-info">Ses ve Isı Yalıtımlı Ürünler</p>
+            <p class="description-text">2024 Yılında Zek İnşaatın Sivas Caddesindeki İpek saray Arkası Projesini Tamamladık.</p>
+        </div>
+
+        <div class="reference-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9LcWiyFE7tPwEsagHSYwyj_8wqGJfgmHGg&s" class="reference-logo">
+            <h3>Door-A Panel Sistemleri</h3>
+            <p class="project-info">Panel Ve Doğrama İmalatçısı</p>
+            <p class="description-text">Modern, gelişmiş doğrama ve panel imalatı yapan Door-A Firması en önemli iş ortaklarımızdandır.</p>
+        </div>
+        
+    </div>
+    
+</section>
+<style>
+
+
+.references-custom-design {
+
+    text-align: center;
+}
+
+.references-custom-design .section-title {
+    color: #cc0000; 
+    margin-bottom: 5px;
+}
+
+.references-custom-design .section-description {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.references-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 25px; 
+    padding: 20px;
+}
+
+.reference-item {
+    background-color: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 25px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); 
+    transition: all 0.3s ease;
+    min-height: 250px; 
+}
+
+.reference-item:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); 
+    transform: translateY(-8px); 
+}
+
+.reference-logo {
+    width: 80px; 
+    height: auto;
+    margin-bottom: 15px;
+    filter: grayscale(80%); 
+    transition: filter 0.3s;
+}
+
+.reference-item:hover .reference-logo {
+    filter: grayscale(0%); 
+}
+
+.reference-item h3 {
+    color: #007bff; 
+    font-size: 1.3em;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.project-info {
+    font-size: 0.9em;
+    color: #4CAF50; 
+    font-weight: bold;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 5px;
+}
+
+.description-text {
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: #555;
+}
+
+
+@media (max-width: 1200px) {
+    .references-grid {
+        grid-template-columns: repeat(3, 1fr); 
+    }
+}
+
+@media (max-width: 768px) {
+    .references-grid {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 576px) {
+    .references-grid {
+        grid-template-columns: 1fr; 
+        padding: 0;
+    }
+}
+</style>
+</section>
+    <section id="bayiler" class="content-section about-section">
+    <h2>Yetkili Bayilerimiz ve Servis Noktaları</h2>
+    <p style="text-align: center; font-size: 1.1em; color: #007bff; margin-bottom: 30px;">
+        Size en yakın DERA PVC bayisini bulun veya bölgenizdeki en büyük dağıtım merkezimizi inceleyin.
+    </p>
+
+
+    <h3 style="color: #cc0000; margin-top: 40px; border-bottom: 2px solid #eee; padding-bottom: 10px;">FABRİKA VE SHOWROOM NOKTALARI</h3>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 20px;">
+        
+        <div style="background-color: #ffffff; padding: 20px; border-radius: 8px; border: 2px solid #007bff; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <h4 style="color: #007bff; margin-top: 0; border-bottom: 1px dashed #ddd; padding-bottom: 10px;">DERA PVC FABRİKA</h4>
+            <p><strong>Adres:</strong> 30 Ağustos Mahallesi Gemlik Caddesi Yağmur Sok. No:20/A Melikgazi - Kayseri</p>
+            <p><strong>İletişim:</strong> +90 352 326 22 64 | info@derapvc.com.tr</p>
+            <a href="https://www.google.com/maps/dir//DERA+PVC,+30+A%C4%9Fustos,+Anamur+Cd.+No:42,+38070+Melikgazi%2FKayseri/@38.7502021,35.3820038,17z/data=!4m16!1m7!3m6!1s0x152b0553359d37e9:0x89139aed194647bd!2sDERA+PVC!8m2!3d38.7502021!4d35.3845787!16s%2Fg%2F11c72qdrsp!4m7!1m0!1m5!1m1!1s0x152b0553359d37e9:0x89139aed194647bd!2m2!1d35.3845787!2d38.7502021?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D" style="display: inline-block; margin-top: 10px; background-color: #007bff; color: white; padding: 8px 15px; text-decoration: none; border-radius: 5px; font-size: 0.9em;">Yol Tarifi Al</a>
+        </div>
+
+        <div style="background-color: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+            <h4 style="color: #4CAF50; margin-top: 0; border-bottom: 1px dashed #ddd; padding-bottom: 10px;">DERA PVC MERKEZ</h4>
+            <p><strong>Adres:</strong> Gevhernesibe Mah. Kocasinan Bulvarı No:110/A Kocasinan - Kayseri / TÜRKİYE</p>
+            <p><strong>İletişim:</strong> +90 352 225 00 23 | info@derapvc.com.tr</p>
+            <a href="https://www.google.com/maps/dir//Dera+Pvc+Cambalkon+ve+Panjur,+Gevhernesibe,+Kocasinan+Bulvar%C4%B1,+Kocasinan%2FKayseri/@38.7502021,35.3820038,17z/data=!4m8!4m7!1m0!1m5!1m1!1s0x152b0df3e962cbef:0x2579b20dd57f8f3f!2m2!1d35.4814078!2d38.7299229?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoASAFQAw%3D%3D" style="display: inline-block; margin-top: 10px; background-color: #4CAF50; color: white; padding: 8px 15px; text-decoration: none; border-radius: 5px; font-size: 0.9em;">Yol Tarifi Al</a>
+        </div>
+        
+    </div>
+    
+    <p style="text-align: center; margin-top: 50px;">
+        <span style="font-weight: bold; color: #555;"></span>
+    </p>
+
+</section>
+    <section id="iletisim" class="content-section about-section">
+    <h2>Bize Ulaşın</h2>
+    <p>Sorularınız, işbirliği teklifleriniz veya bayilik başvurularınız için aşağıdaki iletişim kanallarını kullanabilir veya formu doldurarak bize hızlıca ulaşabilirsiniz.</p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 40px; margin-top: 30px;">
+        
+        <div style="flex: 1; min-width: 300px;">
+            <h3>İletişim Kanalları</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 20px;">
+                    <strong style="color: #4CAF50;">🏢 Fabrika Adresi:</strong><br>
+                    30 Ağustos Mahallesi Gemlik Caddesi Yağmur Sok. No:20/A Melikgazi - Kayseri
+                </li>
+                <li style="margin-bottom: 20px;">
+                    <strong style="color: #4CAF50;">📞 Telefon:</strong><br>
+                    <a href="tel:+903523210000" style="text-decoration: none; color: #007bff;">+90 352 326 22 64</a>
+                </li>
+                <li style="margin-bottom: 20px;">
+                    <strong style="color: #4CAF50;">📧 E-posta:</strong><br>
+                    <a href="mailto:info@derapvc.com.tr" style="text-decoration: none; color: #007bff;">info@derapvc.com.tr</a>
+                </li>
+                <li style="margin-bottom: 20px;">
+                    <strong style="color: #4CAF50;">📠 Fax:</strong><br>
+                    +90 352 326 22 65
+                </li>
+            </ul>
+
+            <h3 style="margin-top: 40px;">Çalışma Saatlerimiz</h3>
+            <p>Pazartesi - Cuma: 08:00 - 18:00</p>
+            <p>Cumartesi: 08:00 - 12:00</p>
+            <p>Pazar: Kapalı</p>
+        </div>
+        
+        <div style="flex: 2; min-width: 300px; padding: 20px; border: 1px solid #ddd; border-radius: 8px; background-color: #f9f9f9;">
+            <h3>Hızlı İletişim Formu</h3>
+            <form id="contactForm" action="submit_form.php" method="POST">
+                
+                <div style="margin-bottom: 15px;">
+                    <label for="name" style="display: block; margin-bottom: 5px; font-weight: bold;">Adınız Soyadınız:</label>
+                    <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label for="email" style="display: block; margin-bottom: 5px; font-weight: bold;">E-posta Adresiniz:</label>
+                    <input type="email" id="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="subject" style="display: block; margin-bottom: 5px; font-weight: bold;">Konu:</label>
+                    <select id="subject" name="subject" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                        <option value="">Lütfen Bir Konu Seçin</option>
+                        <option value="bayilik">Bayilik Başvurusu</option>
+                        <option value="fiyat">Fiyat Teklifi Talebi</option>
+                        <option value="genel">Genel Bilgi Talebi</option>
+                    </select>
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label for="message" style="display: block; margin-bottom: 5px; font-weight: bold;">Mesajınız:</label>
+                    <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; resize: vertical;"></textarea>
+                </div>
+                
+                <button type="submit" style="background-color: #007bff; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 1.1em; transition: background-color 0.3s;">
+                    Gönder
+                </button>
+            </form>
+            <p id="formStatus" style="margin-top: 15px; font-weight: bold;"></p>
+        </div>
+    </div>
+</section>
+    <footer>
+<style>
+
+    .footer-sitemap-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 50px 20px 20px 20px; 
+        color: white;
+    }
+    .footer-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 30px;
+        border-bottom: 1px solid #555; 
+        padding-bottom: 30px;
+        margin-bottom: 20px;
+    }
+    .footer-column {
+        flex-grow: 1;
+        min-width: 180px; 
+        max-width: 25%;
+    }
+    .footer-column h4 {
+        color: white; 
+        font-size: 1.2em;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #007bff; 
+        padding-bottom: 8px;
+        font-weight: bold;
+    }
+    .footer-column ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .footer-column ul li {
+        margin-bottom: 10px;
+    }
+    .footer-column ul li a {
+        color: #ccc;
+        text-decoration: none;
+        font-size: 0.95em;
+        transition: color 0.3s;
+        display: inline-block;
+    }
+    .footer-column ul li a:hover {
+        color: #4CAF50;
+    }
+
+    .social-icons a {
+        display: inline-block;
+        margin-right: 10px;
+        font-size: 24px; 
+        color: white;
+        transition: transform 0.3s;
+    }
+    .social-icons a:hover {
+        transform: scale(1.1);
+        color: #007bff; 
+    }
+
+    .contact-info p {
+        margin: 5px 0;
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+    .contact-info .large-number {
+        font-size: 2.2em;
+        color: #4CAF50; 
+        font-weight: 700;
+        letter-spacing: -1px;
+    }
+
+    .copyright {
+        text-align: center;
+        padding: 10px 0;
+        font-size: 0.85em;
+        color: #888;
+    }
+    @media (max-width: 768px) {
+        .footer-column {
+            max-width: 48%; 
+        }
+    }
+    @media (max-width: 480px) {
+        .footer-column {
+            max-width: 100%; 
+        }
+    }
+</style>
+
+<footer>
+    <div class="footer-sitemap-container">
+        <div class="footer-grid">
+            
+            <div class="footer-column">
+                <h4>Site Haritası</h4>
+                <ul>
+                    <li><a href="#" onclick="showContent('anasayfa'); return false;">Ana Sayfa</a></li>
+                    <li><a href="#" onclick="showContent('hakkimizda'); return false;">Hakkımızda / Vizyon</a></li>
+                    <li><a href="#" onclick="showContent('referanslar'); return false;">Referanslarımız</a></li>
+                    <li><a href="#" onclick="showContent('bayiler'); return false;">Bayilerimiz</a></li>
+                    <li><a href="#" onclick="showContent('haberler'); showNewsDetail('haber1'); return false;">Haberler</a></li>
+                    <li><a href="#" onclick="showContent('iletisim'); return false;">İletişim</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>PVC Sistemleri</h4>
+                <ul>
+                    <li><a href="#" onclick="showContent('urunler'); showProductCategory('pvc'); showProductSeries('pro7006'); return false;">PRO7006 Serisi (Ultra)</a></li>
+                    <li><a href="#" onclick="showContent('urunler'); showProductCategory('pvc'); showProductSeries('pro8106'); return false;">PRO8106 Serisi (Safir)</a></li>
+                    <li><a href="#" onclick="showContent('urunler'); showProductCategory('pvc'); showProductSeries('konig'); return false;">KÖNİG Seri</a></li>
+                    <li><a href="#" onclick="showContent('urunler'); showProductCategory('pvc'); showProductSeries('newSliding'); return false;">Sürme Sistemleri</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Alternatif Ürünler & Diğer</h4>
+                <ul>
+                    <li><a href="#" onclick="showContent('urunler'); showProductCategory('alternative'); showAlternativeSeries('panjur'); return false;">Panjur Sistemleri</a></li>
+                    <li><a href="#" onclick="showContent('urunler'); showProductCategory('alternative'); showAlternativeSeries('cambalkon'); return false;">Cam Balkon</a></li>
+                    <li><a href="#" onclick="showContent('urunler'); showProductCategory('alternative'); showAlternativeSeries('sineklik'); return false;">Sineklik</a></li>
+                    <li><a href="https://arikovanifiyatlari.com/" target="_blank">Dera Bee Arı Villaları</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Ortak Şirketler</h4>
+                <ul>
+                    
+                    <li><a href="https://arikovanifiyatlari.com/" target="_blank">Dera Bee Arı Villaları</a></li>
+                    <li><a href="https://arikovanifiyatlari.com/" target="_blank">König Panel Sistemleri</a></li>
+                    <li><a href="https://arikovanifiyatlari.com/" target="_blank">Door-A Panel Sistemleri</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column contact-info">
+                <h4>Bizi Takip Edin</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/dera.pvc.3" target="_blank" title="Facebook">&#xf09a;</a> 
+                    <a href="https://www.instagram.com/dera.pvc/" target="_blank" title="Instagram">&#xf16d;</a> 
+                    <a href="https://www.youtube.com/watch?v=jhhKf4usF3s" target="_blank" title="YouTube">&#xf167;</a> 
+                </div>
+
+                <h4 style="margin-top: 25px;">Müşteri Danışma Hattı</h4>
+                <p class="large-number">+90 352 326 22 64</p> 
+                <p>+90 352 225 00 23</p>
+                <p>+90 532 583 18 85</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            &copy; 2025 DERA PVC Dış Ticaret Yapı Ltd. Şti. Tüm Hakları Saklıdır.
+        </div>
+    </div>
+</footer>
+    </footer>
+    <script>
+
+        const menuToggleButton = document.getElementById('menuToggle');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const firmaProfiliLi = document.getElementById('firma-profili-li');
+
+        menuToggleButton.addEventListener('click', function() {
+            dropdownMenu.classList.toggle('active');
+            if (!dropdownMenu.classList.contains('active')) {
+                firmaProfiliLi.classList.remove('submenu-active');
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!menuToggleButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                if (dropdownMenu.classList.contains('active')) {
+                    dropdownMenu.classList.remove('active');
+                    firmaProfiliLi.classList.remove('submenu-active');
+                }
+            }
+        });
+
+        function showContent(contentId) {
+            const contents = document.querySelectorAll('.content-section');
+
+
+            contents.forEach(content => {
+                content.style.display = 'none';
+                content.classList.remove('home-active');
+            });
+
+            const activeContent = document.getElementById(contentId);
+            if (activeContent) {
+                activeContent.style.display = 'block';
+            }
+
+            if (contentId === 'anasayfa') {
+                activeContent.classList.add('home-active');
+            }
+
+
+            dropdownMenu.classList.remove('active');
+            firmaProfiliLi.classList.remove('submenu-active');
+
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+
+        function showProductCategory(categoryId) {
+
+            document.querySelectorAll('#productCategoryNav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(categoryId + 'Button').classList.add('active');
+
+            document.querySelectorAll('.product-category').forEach(content => {
+                content.style.display = 'none';
+            });
+            document.getElementById(categoryId + '-systems').style.display = 'block';
+            
+
+            if (categoryId === 'pvc') {
+                showProductSeries('pro7006');
+            }
+
+            if (categoryId === 'alternative') {
+                showAlternativeSeries('panjur');
+            }
+        }
+
+
+        function showProductSeries(seriesId) {
+
+            document.querySelectorAll('#pvcSubNav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const seriesButton = document.getElementById(seriesId + 'Button');
+            if(seriesButton) seriesButton.classList.add('active');
+
+            document.querySelectorAll('#pvc-content-area .product-series-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            const seriesContent = document.getElementById(seriesId);
+            if(seriesContent) seriesContent.style.display = 'block';
+        }
+        
+
+        function showAlternativeSeries(seriesId) {
+
+            document.querySelectorAll('#alternativeSubNav button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            const seriesButton = document.getElementById(seriesId + 'Button');
+            if(seriesButton) seriesButton.classList.add('active');
+            
+
+            document.querySelectorAll('#alternative-content-area .alternative-series-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            const seriesContent = document.getElementById(seriesId);
+            if(seriesContent) seriesContent.style.display = 'block';
+        }
+
+
+        function showNewsDetail(newsId) {
+
+            document.querySelectorAll('.news-detail').forEach(detail => {
+                detail.classList.remove('active');
+            });
+
+            const activeNewsDetail = document.getElementById(newsId);
+            if (activeNewsDetail) {
+                activeNewsDetail.classList.add('active');
+            }
+
+            if (document.getElementById('haberler').style.display === 'none') {
+                showContent('haberler');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+
+        let slideIndex = 1;
+        let slideTimer;
+         window.onload = function() {
+            showSlides(slideIndex);
+            startAutoSlide();
+        };
+         function startAutoSlide() {
+            if (slideTimer) {
+                clearInterval(slideTimer);
+            }
+            slideTimer = setInterval(function() {
+
+                if (document.getElementById('anasayfa') && document.getElementById('anasayfa').style.display !== 'none') {
+                    plusSlides(1);
+                }
+            }, 5000); 
+        }
+         function plusSlides(n) {
+            startAutoSlide();
+             showSlides(slideIndex += n);
+        }
+         function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slider-item");
+
+             if (slides.length === 0) return;
+
+             if (n > slides.length) {
+                slideIndex = 1;
+            }
+             if (n < 1) {
+                slideIndex = slides.length;
+            }
+
+             for (i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+            }
+
+             slides[slideIndex - 1].classList.add('active');
+        }
+
+
+        showContent('anasayfa');
+    </script>
+</body>
+</html>
