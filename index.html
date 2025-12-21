@@ -421,6 +421,7 @@
             <li><a href="#" onclick="showContent('referanslar'); return false;">Referanslarımız</a></li>
             <li><a href="#" onclick="showContent('bayiler'); return false;">Bayilerimiz</a></li>
             <li><a href="#" onclick="showContent('iletisim'); return false;">İletişim</a></li>
+            <li><a href="#" onclick="showContent('fiyat'); return false;">Fiyat</a></li>
 
                 </a>
             </li>
@@ -649,7 +650,7 @@ Pencere ve kapılara özel ölçülerle üretilen plise, stor ve menteşeli sine
             </div>
         </div>
     </section>
-    <section id="kalite" class="content-section about-section"><h2>Kalite (İçerik Eklenecek)</h2></section>
+
     
     <section id="haberler" class="content-section about-section">
         <h2>Haberler</h2>
@@ -898,6 +899,221 @@ Pencere ve kapılara özel ölçülerle üretilen plise, stor ve menteşeli sine
     </p>
 
 </section>
+
+
+<section id="fiyat" class="content-section" style="display:none; padding: 20px; max-width: 1250px; margin: 40px auto; font-family: 'Segoe UI', sans-serif;">
+    <div style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 50px rgba(0,0,0,0.2); border: 2px solid #007bff;">
+        
+        <div style="background: #007bff; color: white; padding: 15px; text-align: center;">
+            <h2 style="margin:0;">PVC Teknik Çizim ve Kanat Tasarım Paneli</h2>
+        </div>
+
+        <div style="padding: 25px; display: flex; flex-wrap: wrap; gap: 30px;">
+            
+            <div style="flex: 1.6; min-width: 400px; display: flex; flex-direction: column; align-items: center; background: #f8f9fa; border-radius: 12px; padding: 60px; position: relative; border: 1px solid #dee2e6;">
+                
+                <div id="pencereCerceve" style="border: 16px solid #fff; box-shadow: 0 15px 45px rgba(0,0,0,0.1); background: #90caf9; position: relative; display: block;">
+                    <div id="bolmeContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
+                    
+                    <div id="kayitlarContainer" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10;"></div>
+                    
+                    <div id="etiketW" style="position: absolute; top: -50px; left: 50%; transform: translateX(-50%); font-weight: bold; color: #1a73e8; background: #fff; padding: 4px 10px; border-radius: 4px; border:1.5px solid #1a73e8;">150 cm</div>
+                    <div id="etiketH" style="position: absolute; left: -90px; top: 50%; transform: translateY(-50%) rotate(-90deg); font-weight: bold; color: #1a73e8; background: #fff; padding: 4px 10px; border-radius: 4px; border:1.5px solid #1a73e8;">140 cm</div>
+                </div>
+
+                <div style="margin-top: 50px; text-align: center;">
+                    <div style="background: #fff; padding: 10px 20px; border-radius: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                        <strong id="seriBilgi">PRO7006 Ultra Seri</strong> | <span id="renkBilgi">Beyaz</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="flex: 1; min-width: 320px; max-height: 850px; overflow-y: auto; padding-right: 10px;">
+                
+                <label style="font-size:12px; font-weight:bold; color:#444;">Profil Serisi</label>
+                <select id="f_seri" onchange="arayuzSifirla()" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px;">
+                    <option value="1850">PRO7006 (1850 TL/m²)</option>
+                    <option value="2300">PRO8106 (2300 TL/m²)</option>
+                    <option value="2750">KÖNİG (2750 TL/m²)</option>
+                </select>
+
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <div style="flex:1;">
+                        <label style="font-size:11px; font-weight:bold;">Genişlik (cm)</label>
+                        <input type="number" id="f_w" value="150" oninput="arayuzSifirla()" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px;">
+                    </div>
+                    <div style="flex:1;">
+                        <label style="font-size:11px; font-weight:bold;">Yükseklik (cm)</label>
+                        <input type="number" id="f_h" value="140" oninput="arayuzSifirla()" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px;">
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                    <div style="flex:1;">
+                        <label style="font-size:11px; font-weight:bold;">Dikey Kayıt</label>
+                        <input type="number" id="f_d_adet" value="1" min="0" max="3" oninput="arayuzSifirla()" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px;">
+                    </div>
+                    <div style="flex:1;">
+                        <label style="font-size:11px; font-weight:bold;">Yatay Kayıt</label>
+                        <input type="number" id="f_y_adet" value="0" min="0" max="2" oninput="arayuzSifirla()" style="width:100%; padding:8px; border:1px solid #ccc; border-radius:6px;">
+                    </div>
+                </div>
+
+                <div id="kayitKonumAyarlari" style="background: #fff3e0; padding: 12px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #ffe0b2;">
+                    <h4 style="margin:0 0-10px 0; font-size:13px; color:#e65100;">Kayıt Ölçülerini Düzenle</h4>
+                    <div id="konumSliderListesi"></div>
+                </div>
+
+                <div id="acilimAyarlari" style="background: #e3f2fd; padding: 12px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #bbdefb;">
+                    <h4 style="margin:0 0 10px 0; font-size:13px; color:#0d47a1;">Bölme Açılım Türleri</h4>
+                    <div id="bolmeListesi"></div>
+                </div>
+
+                <label style="font-size:11px; font-weight:bold;">Profil Rengi</label>
+                <select id="f_renk" onchange="cizimGuncelle()" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px;">
+                    <option value="1" data-hex="#ffffff">Beyaz</option>
+                    <option value="1.25" data-hex="#333333">Antrasit</option>
+                    <option value="1.20" data-hex="#5d4037">Altın Meşe</option>
+                </select>
+
+                <div style="background: #28a745; color: white; padding: 20px; border-radius: 12px; text-align: center;">
+                    <span style="font-size: 13px; opacity: 0.9;">Tahmini Toplam Tutar</span><br>
+                    <strong style="font-size: 32px;"><span id="f_total">0</span> TL</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let bolmeTipleri = {}; 
+
+        function arayuzSifirla() {
+            const w = parseFloat(document.getElementById('f_w').value) || 0;
+            const h = parseFloat(document.getElementById('f_h').value) || 0;
+            const dAdet = parseInt(document.getElementById('f_d_adet').value) || 0;
+            const yAdet = parseInt(document.getElementById('f_y_adet').value) || 0;
+
+            // 1. Kayıt Sliderlarını Oluştur
+            let sList = document.getElementById('konumSliderListesi');
+            sList.innerHTML = "";
+            for(let i=1; i<=dAdet; i++) {
+                let v = Math.round((w/(dAdet+1))*i);
+                sList.innerHTML += `<div style="margin-top:10px;"><label style="font-size:10px;">Dikey Kayıt ${i}: <b id="dv_${i}">${v}</b> cm</label><input type="range" id="ds_${i}" min="15" max="${w-15}" value="${v}" oninput="document.getElementById('dv_${i}').innerText=this.value; cizimGuncelle();" style="width:100%; accent-color:#e65100;"></div>`;
+            }
+            for(let j=1; j<=yAdet; j++) {
+                let v = Math.round((h/(yAdet+1))*j);
+                sList.innerHTML += `<div style="margin-top:10px;"><label style="font-size:10px;">Yatay Kayıt ${j}: <b id="yv_${j}">${v}</b> cm</label><input type="range" id="ys_${j}" min="15" max="${h-15}" value="${v}" oninput="document.getElementById('yv_${j}').innerText=this.value; cizimGuncelle();" style="width:100%; accent-color:#4caf50;"></div>`;
+            }
+
+            // 2. Açılım Listesini Oluştur
+            let bList = document.getElementById('bolmeListesi');
+            bList.innerHTML = "";
+            const toplamBolme = (dAdet + 1) * (yAdet + 1);
+            for (let i = 0; i < toplamBolme; i++) {
+                if(!bolmeTipleri[i]) bolmeTipleri[i] = "sabit";
+                bList.innerHTML += `
+                    <div style="display:flex; align-items:center; gap:5px; margin-bottom:5px;">
+                        <span style="font-size:10px; width:50px;">Bölme ${i+1}:</span>
+                        <select onchange="bolmeSet(${i}, this.value)" style="flex:1; font-size:10px; padding:2px;">
+                            <option value="sabit" ${bolmeTipleri[i]=='sabit'?'selected':''}>Sabit</option>
+                            <option value="sol" ${bolmeTipleri[i]=='sol'?'selected':''}>Sol</option>
+                            <option value="sag" ${bolmeTipleri[i]=='sag'?'selected':''}>Sağ</option>
+                            <option value="c-sol" ${bolmeTipleri[i]=='c-sol'?'selected':''}>Çift Sol</option>
+                            <option value="c-sag" ${bolmeTipleri[i]=='c-sag'?'selected':''}>Çift Sağ</option>
+                            <option value="vst" ${bolmeTipleri[i]=='vst'?'selected':''}>Vasistas</option>
+                        </select>
+                    </div>`;
+            }
+            cizimGuncelle();
+        }
+
+        function bolmeSet(id, val) { bolmeTipleri[id] = val; cizimGuncelle(); }
+
+        function cizimGuncelle() {
+            const w = parseFloat(document.getElementById('f_w').value) || 0;
+            const h = parseFloat(document.getElementById('f_h').value) || 0;
+            const dAdet = parseInt(document.getElementById('f_d_adet').value) || 0;
+            const yAdet = parseInt(document.getElementById('f_y_adet').value) || 0;
+            const renkHex = document.getElementById('f_renk').options[document.getElementById('f_renk').selectedIndex].getAttribute('data-hex');
+
+            // Kayıt Konumlarını Al
+            let dPos = [0]; for(let i=1; i<=dAdet; i++) dPos.push(parseFloat(document.getElementById('ds_'+i).value)); dPos.push(w);
+            let yPos = [0]; for(let j=1; j<=yAdet; j++) yPos.push(parseFloat(document.getElementById('ys_'+j).value)); yPos.push(h);
+            dPos.sort((a,b)=>a-b); yPos.sort((a,b)=>a-b);
+
+            // Çizim Boyutlandırma
+            let maxDim = 420; let oran = maxDim / Math.max(w, h);
+            let cerceve = document.getElementById('pencereCerceve');
+            cerceve.style.width = (w * oran) + "px"; cerceve.style.height = (h * oran) + "px"; cerceve.style.borderColor = renkHex;
+
+            // Bölmeleri ve Açılımları Çiz
+            const bCont = document.getElementById('bolmeContainer'); bCont.innerHTML = "";
+            let bIndex = 0;
+            let kanatMaliyeti = 0;
+
+            // Yatay bölmeler yukardan aşağı (yPos tersten gidilmeli teknik olarak ama kolaylık için grid mantığı)
+            for(let r=0; r < yPos.length-1; r++) {
+                for(let c=0; c < dPos.length-1; c++) {
+                    let bW = dPos[c+1] - dPos[c];
+                    let bH = yPos[r+1] - yPos[r];
+                    let bX = dPos[c];
+                    let bY = h - yPos[r+1]; // Alttan ölçü sistemi
+
+                    let div = document.createElement('div');
+                    div.style.cssText = `position:absolute; left:${(bX/w)*100}%; top:${(bY/h)*100}%; width:${(bW/w)*100}%; height:${(bH/h)*100}%; border:1px solid rgba(255,255,255,0.2); overflow:hidden;`;
+                    
+                    let tip = bolmeTipleri[bIndex];
+                    if(tip && tip !== "sabit") {
+                        kanatMaliyeti += 950;
+                        div.appendChild(cizSVG(tip));
+                    }
+                    bCont.appendChild(div);
+                    bIndex++;
+                }
+            }
+
+            // Kayıt Çizgilerini Çiz
+            const kCont = document.getElementById('kayitlarContainer'); kCont.innerHTML = "";
+            for(let i=1; i<dPos.length-1; i++) {
+                let l = document.createElement('div');
+                l.style.cssText = `position:absolute; top:0; bottom:0; width:12px; background:${renkHex}; left:${(dPos[i]/w)*100}%; transform:translateX(-50%);`;
+                kCont.appendChild(l);
+            }
+            for(let j=1; j<yPos.length-1; j++) {
+                let l = document.createElement('div');
+                l.style.cssText = `position:absolute; left:0; right:0; height:12px; background:${renkHex}; bottom:${(yPos[j]/h)*100}%; transform:translateY(50%);`;
+                kCont.appendChild(l);
+            }
+
+            // Fiyat Hesapla
+            let m2 = (w/100)*(h/100);
+            let seriFiyat = parseFloat(document.getElementById('f_seri').value);
+            let toplam = ((m2 * seriFiyat) + ( (dAdet+yAdet)*350 ) + kanatMaliyeti) * parseFloat(document.getElementById('f_renk').value);
+            document.getElementById('f_total').innerText = Math.round(toplam).toLocaleString('tr-TR');
+            document.getElementById('etiketW').innerText = w + " cm"; document.getElementById('etiketH').innerText = h + " cm";
+        }
+
+        function cizSVG(tip) {
+            let svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.setAttribute("viewBox", "0 0 100 100");
+            svg.setAttribute("preserveAspectRatio", "none");
+            svg.style.cssText = "position:absolute; width:100%; height:100%; top:0; left:0;";
+            let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            let d = "";
+            if (tip === "sol") d = "M 95 5 L 5 50 L 95 95";
+            else if (tip === "sag") d = "M 5 5 L 95 50 L 5 95";
+            else if (tip === "c-sol") d = "M 95 5 L 5 50 L 95 95 M 5 95 L 50 5 L 95 95";
+            else if (tip === "c-sag") d = "M 5 5 L 95 50 L 5 95 M 5 95 L 50 5 L 95 95";
+            else if (tip === "vst") d = "M 5 5 L 50 95 L 95 5";
+            path.setAttribute("d", d); path.setAttribute("stroke", "white"); path.setAttribute("fill", "none"); 
+            path.setAttribute("stroke-width", "2"); path.setAttribute("stroke-dasharray", "4,4"); path.setAttribute("vector-effect", "non-scaling-stroke");
+            svg.appendChild(path); return svg;
+        }
+        setTimeout(arayuzSifirla, 300);
+    </script>
+</section>
+
+
     <section id="iletisim" class="content-section about-section">
     <h2>Bize Ulaşın</h2>
     <p>Sorularınız, işbirliği teklifleriniz veya bayilik başvurularınız için aşağıdaki iletişim kanallarını kullanabilir veya formu doldurarak bize hızlıca ulaşabilirsiniz.</p>
@@ -1333,8 +1549,95 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
         console.error('Hata!', error);
     });
 });
+
+
+function showContent(id) {
+    // 1. Tüm bölümleri bul ve zorla gizle
+    var sections = document.querySelectorAll('.content-section');
+    for (var i = 0; i < sections.length; i++) {
+        sections[i].style.display = 'none';
+    }
+
+    // 2. Tıklanan bölümü bul ve zorla göster
+    var target = document.getElementById(id);
+    if (target) {
+        target.style.setProperty('display', 'block', 'important');
+    }
+
+    // 3. Menüyü kapat (ID'si dropdownMenu ise)
+    var menu = document.getElementById('dropdownMenu');
+    if (menu) {
+        menu.classList.remove('active');
+    }
+
+    // 4. Eğer fiyat bölümüyse hesaplamayı çalıştır
+    if (id === 'fiyat') {
+        f_hesapla();
+    }
+    
+    window.scrollTo(0, 0);
+}
+
+// Hesaplama Yardımcı Fonksiyonları
+function f_hesapla() {
+    var w = document.getElementById('f_w').value / 100;
+    var h = document.getElementById('f_h').value / 100;
+    var b = document.getElementById('f_s').value;
+    if(w > 0 && h > 0) {
+        var s = (w * h) * b;
+        document.getElementById('f_total').innerText = Math.round(s).toLocaleString('tr-TR');
+    }
+}
+
+function showContent(id) {
+    // 1. Tüm bölümleri bul ve zorla gizle
+    var sections = document.querySelectorAll('.content-section');
+    for (var i = 0; i < sections.length; i++) {
+        sections[i].style.display = 'none';
+    }
+
+    // 2. Tıklanan bölümü bul ve zorla göster
+    var target = document.getElementById(id);
+    if (target) {
+        target.style.setProperty('display', 'block', 'important');
+    }
+
+    // 3. Menüyü kapat (ID'si dropdownMenu ise)
+    var menu = document.getElementById('dropdownMenu');
+    if (menu) {
+        menu.classList.remove('active');
+    }
+
+    // 4. Eğer fiyat bölümüyse hesaplamayı çalıştır
+    if (id === 'fiyat') {
+        f_hesapla();
+    }
+    
+    window.scrollTo(0, 0);
+}
+
+// Hesaplama Yardımcı Fonksiyonları
+function f_hesapla() {
+    var w = document.getElementById('f_w').value / 100;
+    var h = document.getElementById('f_h').value / 100;
+    var b = document.getElementById('f_s').value;
+    if(w > 0 && h > 0) {
+        var s = (w * h) * b;
+        document.getElementById('f_total').innerText = Math.round(s).toLocaleString('tr-TR');
+    }
+}
+
+function f_degis() {
+    var s = document.getElementById('f_s');
+    var i = document.getElementById('f_img');
+    document.getElementById('f_baslik').innerText = s.options[s.selectedIndex].text;
+    if(s.value == "1850") i.src = "https://www.derapvc.com.tr/user/files/178896.PNG";
+    if(s.value == "2300") i.src = "https://www.derapvc.com.tr/user/files/178897.png";
+    if(s.value == "2750") i.src = "https://www.derapvc.com.tr/user/files/164728.png";
+    f_hesapla();
+}
+
+
 </script>
-
-
 </body>
 </html>
