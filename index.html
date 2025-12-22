@@ -396,6 +396,48 @@
         background-size: cover !important; /* Resmi kutuya yayar */
         background-position: center center !important;
     }
+
+
+@media screen and (max-width: 768px) {
+    /* 1. Kapsayıcılar: Yan yana olan her şeyi alt alta getir */
+    .container, .row, .flex-layout {
+        width: 100% !important;
+        display: block !important;
+        padding: 0 15px !important;
+    }
+
+    /* 2. Resimler: Ekrandan taşmasını engelle */
+    img {
+        max-width: 100%;
+        height: auto !important;
+    }
+
+    /* 3. Menü (Navigasyon): Mobilde alt alta veya gizli olmalı */
+    header nav {
+        display: none; /* Buraya ileride bir 'hamburger menü' yapabiliriz */
+    }
+
+    /* 4. Yazılar: Okunabilirliği artır */
+    body {
+        font-size: 16px; /* Mobilde ideal okuma boyutu */
+    }
+
+    h1 { font-size: 24px !important; }
+    h2 { font-size: 20px !important; }
+
+    /* 5. Butonlar: Parmakla basmayı kolaylaştır */
+    button, .btn, .fiyat-hesapla-butonu {
+        width: 100% !important; /* Mobilde tam genişlik genelde daha iyidir */
+        padding: 15px !important;
+        font-size: 18px !important;
+        margin-bottom: 10px;
+    }
+}
+
+
+
+
+
 }
 
         
