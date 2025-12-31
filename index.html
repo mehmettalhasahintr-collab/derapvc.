@@ -369,41 +369,60 @@
 
 
 
-#fiyat {
+@media (max-width: 768px) {
+    /* 1. Ana Bölümü Esnet */
+    #fiyat {
+        padding: 10px !important;
+        margin: 10px auto !important;
+    }
+
+    /* 2. Flex yapısını alt alta getir */
+    #fiyat > div > div:nth-child(2) {
+        flex-direction: column !important;
+        padding: 10px !important;
+        gap: 20px !important;
+    }
+
+    /* 3. Sol Panel (Pencere Çizimi) Düzenlemesi */
+    #fiyat div[style*="flex: 1.6"] {
+        flex: none !important;
         width: 100% !important;
-        padding: 15px 5px !important;
+        min-width: unset !important;
+        padding: 40px 10px !important; /* Padding'i azalttık, çizim sığsın */
         box-sizing: border-box !important;
     }
 
-    /* Resmin veya içeriğin olduğu kapsayıcı kutu */
-    .pencere-kapsayici, 
-    #fiyat .content, 
-    #fiyat div:has(img) { 
+    /* Pencerenin kendisini biraz küçültelim ki kenarlardan taşmasın */
+    #pencereCerceve {
+        transform: scale(0.9); /* Çizimi %10 oranında küçültür */
+        margin: 0 auto;
+    }
+
+    /* Yanlardaki ölçü etiketlerini görünür kılmak için boşluk */
+    #etiketH {
+        left: -60px !important; /* Mobilde çok dışarıda kalmasın */
+    }
+
+    /* 4. Sağ Panel (Ayarlar ve Fiyat) Düzenlemesi */
+    #fiyat div[style*="flex: 1"] {
+        flex: none !important;
         width: 100% !important;
-        overflow-x: auto !important; /* Sağa kaydırma özelliğini açar */
-        display: block !important;
-        -webkit-overflow-scrolling: touch; /* Mobilde kaydırma hissini yumuşatır */
-        border: 1px solid #eee; /* Kaydırılabilir alan olduğu belli olsun diye hafif çerçeve */
-        padding-bottom: 10px;
+        min-width: unset !important;
+        max-height: none !important; /* Kaydırmayı kaldır, sayfa aksın */
+        padding-right: 0 !important;
     }
 
-    #fiyat img {
-        /* Resim çok küçülmesin diye alt limit koyuyoruz */
-        min-width: 500px !important; 
-        width: auto !important;
-        height: auto !important;
-        max-width: none !important; /* Küçülmeye zorlayan kodu iptal ettik */
+    /* Tahmini Tutar kutusunu mobilde daha şık yap */
+    #f_total {
+        font-size: 28px !important;
     }
 
-    /* Bilgilendirme yazısı ekleyelim (Opsiyonel) */
-    .pencere-kapsayici::before {
-        content: "↔ Sağa kaydırarak inceleyebilirsiniz";
-        display: block;
-        font-size: 12px;
-        color: #888;
-        text-align: center;
-        margin-bottom: 5px;
+    /* Input ve Select'leri parmakla basılacak kadar büyüt */
+    #f_seri, #f_renk, input[type="number"] {
+        height: 45px;
+        font-size: 16px !important;
     }
+}
 
 
 
