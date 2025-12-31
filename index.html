@@ -369,33 +369,41 @@
 
 
 
-/* FİYAT BÖLÜMÜ MOBİL SIKIŞTIRMA KODU */
 #fiyat {
-    width: 100% !important;
-    padding: 20px 10px !important;
-    box-sizing: border-box !important;
-    overflow: hidden !important; /* Dışarı taşan her şeyi keser */
-}
+        width: 100% !important;
+        padding: 15px 5px !important;
+        box-sizing: border-box !important;
+    }
 
-#fiyat img {
-    max-width: 100% !important; /* Pencere resmi ekranı geçemez */
-    height: auto !important;
-    display: block;
-    margin: 0 auto;
-}
+    /* Resmin veya içeriğin olduğu kapsayıcı kutu */
+    .pencere-kapsayici, 
+    #fiyat .content, 
+    #fiyat div:has(img) { 
+        width: 100% !important;
+        overflow-x: auto !important; /* Sağa kaydırma özelliğini açar */
+        display: block !important;
+        -webkit-overflow-scrolling: touch; /* Mobilde kaydırma hissini yumuşatır */
+        border: 1px solid #eee; /* Kaydırılabilir alan olduğu belli olsun diye hafif çerçeve */
+        padding-bottom: 10px;
+    }
 
-#fiyat table {
-    display: block !important; /* Tabloyu esnek yapar */
-    width: 100% !important;
-    overflow-x: auto !important; /* Tablo genişse parmakla sağa kaydırılır */
-    -webkit-overflow-scrolling: touch;
-    white-space: nowrap; /* Yazılar alt alta binip çirkinleşmez */
-}
+    #fiyat img {
+        /* Resim çok küçülmesin diye alt limit koyuyoruz */
+        min-width: 500px !important; 
+        width: auto !important;
+        height: auto !important;
+        max-width: none !important; /* Küçülmeye zorlayan kodu iptal ettik */
+    }
 
-#fiyat .container, #fiyat .row, #fiyat div {
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-}
+    /* Bilgilendirme yazısı ekleyelim (Opsiyonel) */
+    .pencere-kapsayici::before {
+        content: "↔ Sağa kaydırarak inceleyebilirsiniz";
+        display: block;
+        font-size: 12px;
+        color: #888;
+        text-align: center;
+        margin-bottom: 5px;
+    }
 
 
 
