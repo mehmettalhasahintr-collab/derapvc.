@@ -369,33 +369,42 @@
 
            #haberler-content-wrapper {
         display: flex !important;
-        flex-direction: column !important; /* Liste üste, detay alta */
-        gap: 20px;
+        flex-direction: column !important;
+        padding: 0 !important;
     }
 
     #news-list-container {
         width: 100% !important;
         border-right: none !important;
-        border-bottom: 2px solid #007bff; /* Listenin bittiğini belli eder */
-        padding: 0 0 15px 0 !important;
-        margin: 0 !important;
-        min-width: unset !important;
+        margin-bottom: 20px !important;
     }
 
     #news-detail-container {
         width: 100% !important;
-        padding: 0 !important;
+        box-sizing: border-box !important;
     }
 
-    .news-item-title {
-        width: 100%;
-        box-sizing: border-box; /* Padding'in genişliği bozmasını engeller */
-        margin-bottom: 8px;
+    /* RESMİN TAŞMASINI ENGELLEYEN KRİTİK KISIM */
+    .news-detail img, 
+    .news-image-placeholder img {
+        max-width: 100% !important; /* Resim kutuyu asla geçemez */
+        height: auto !important;    /* Oran bozulmaz */
+        display: block !important;
+        margin: 0 auto !important;  /* Ortalar */
+    }
+
+    /* Eğer resmin arkasında gri bir kutu varsa onu esnek yapalım */
+    .news-image-placeholder {
+        width: 100% !important;
+        height: auto !important;    /* Sabit yüksekliği iptal et */
+        min-height: 150px !important;
+        overflow: hidden !important; /* Her ihtimale karşı taşanı kes */
     }
 
     .news-detail {
-        padding: 15px !important;
-        border-width: 1px !important;
+        padding: 10px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
 
 
