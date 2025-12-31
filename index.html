@@ -369,39 +369,39 @@
 
 
 
-    #fiyat img, 
-    .pencere-gorsel, 
-    .pencere-konteynir {
-        max-width: 100% !important;
-        height: auto !important;
-        display: block;
-        margin: 0 auto;
-    }
+/* FİYAT BÖLÜMÜ MOBİL SIKIŞTIRMA KODU */
+#fiyat {
+    width: 100% !important;
+    padding: 20px 10px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important; /* Dışarı taşan her şeyi keser */
+}
 
-    /* Eğer fiyatlar bir tablo içindeyse mobilde sağa kaydırılabilir yapar */
-    #fiyat .table-responsive, 
-    #fiyat table {
-        display: block !important;
-        width: 100% !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-    }
+#fiyat img {
+    max-width: 100% !important; /* Pencere resmi ekranı geçemez */
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+}
 
-    /* Form girişleri veya kutular varsa genişliği tam yapar */
-    #fiyat input, 
-    #fiyat select, 
-    #fiyat button {
-        width: 100% !important;
-        box-sizing: border-box !important;
-        margin-bottom: 10px;
-    }
+#fiyat table {
+    display: block !important; /* Tabloyu esnek yapar */
+    width: 100% !important;
+    overflow-x: auto !important; /* Tablo genişse parmakla sağa kaydırılır */
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap; /* Yazılar alt alta binip çirkinleşmez */
+}
 
-
-
+#fiyat .container, #fiyat .row, #fiyat div {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
 
 
 
 
+
+            
            #haberler-content-wrapper {
         display: flex !important;
         flex-direction: column !important;
