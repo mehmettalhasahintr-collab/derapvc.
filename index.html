@@ -367,6 +367,41 @@
                 left: 0;
             }
 
+
+
+    #fiyat img, 
+    .pencere-gorsel, 
+    .pencere-konteynir {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block;
+        margin: 0 auto;
+    }
+
+    /* Eğer fiyatlar bir tablo içindeyse mobilde sağa kaydırılabilir yapar */
+    #fiyat .table-responsive, 
+    #fiyat table {
+        display: block !important;
+        width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Form girişleri veya kutular varsa genişliği tam yapar */
+    #fiyat input, 
+    #fiyat select, 
+    #fiyat button {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        margin-bottom: 10px;
+    }
+
+
+
+
+
+
+
            #haberler-content-wrapper {
         display: flex !important;
         flex-direction: column !important;
