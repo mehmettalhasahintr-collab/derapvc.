@@ -370,57 +370,57 @@
 
 
 @media (max-width: 768px) {
-    /* 1. Ana Bölümü Esnet */
+    /* 1. Ana taşıyıcıyı ve fiyat bölümünü sıfırla */
     #fiyat {
-        padding: 10px !important;
-        margin: 10px auto !important;
-    }
-
-    /* 2. Flex yapısını alt alta getir */
-    #fiyat > div > div:nth-child(2) {
-        flex-direction: column !important;
-        padding: 10px !important;
-        gap: 20px !important;
-    }
-
-    /* 3. Sol Panel (Pencere Çizimi) Düzenlemesi */
-    #fiyat div[style*="flex: 1.6"] {
-        flex: none !important;
         width: 100% !important;
-        min-width: unset !important;
-        padding: 40px 10px !important; /* Padding'i azalttık, çizim sığsın */
+        padding: 10px !important;
+        margin: 10px 0 !important;
         box-sizing: border-box !important;
     }
 
-    /* Pencerenin kendisini biraz küçültelim ki kenarlardan taşmasın */
-    #pencereCerceve {
-        transform: scale(0.9); /* Çizimi %10 oranında küçültür */
-        margin: 0 auto;
+    #fiyat > div {
+        border-radius: 10px !important;
     }
 
-    /* Yanlardaki ölçü etiketlerini görünür kılmak için boşluk */
-    #etiketH {
-        left: -60px !important; /* Mobilde çok dışarıda kalmasın */
+    /* 2. Yan yana duran panelleri alt alta getir */
+    #fiyat > div > div:nth-child(2) {
+        flex-direction: column !important;
+        padding: 10px !important;
+        gap: 15px !important;
     }
 
-    /* 4. Sağ Panel (Ayarlar ve Fiyat) Düzenlemesi */
-    #fiyat div[style*="flex: 1"] {
-        flex: none !important;
+    /* 3. Çizim alanındaki o meşhur 400px engelini kaldırıyoruz */
+    #fiyat div[style*="min-width: 400px"] {
+        min-width: unset !important; /* 400px zorlamasını sildik */
         width: 100% !important;
+        padding: 40px 5px !important; /* 60px padding çok fazlaydı, düşürdük */
+        flex: none !important;
+    }
+
+    /* 4. Çizimi ekran genişliğine göre otomatik ölçeklendir */
+    #pencereCerceve {
+        max-width: 90% !important; /* Ekranın %90'ından fazla olamaz */
+        height: auto !important;
+        transform: scale(0.85); /* Hafif küçültme ile etiketlere yer açtık */
+        transform-origin: center;
+        margin: 0 auto !important;
+    }
+
+    /* 5. Ölçü etiketlerinin (150cm vs) dışarı taşmasını engelle */
+    #etiketW { top: -35px !important; font-size: 11px !important; }
+    #etiketH { left: -55px !important; font-size: 11px !important; }
+
+    /* 6. Ayarlar panelini tam genişlik yap */
+    #fiyat div[style*="min-width: 320px"] {
         min-width: unset !important;
-        max-height: none !important; /* Kaydırmayı kaldır, sayfa aksın */
-        padding-right: 0 !important;
+        width: 100% !important;
+        max-height: none !important;
+        padding: 0 !important;
     }
 
-    /* Tahmini Tutar kutusunu mobilde daha şık yap */
-    #f_total {
-        font-size: 28px !important;
-    }
-
-    /* Input ve Select'leri parmakla basılacak kadar büyüt */
-    #f_seri, #f_renk, input[type="number"] {
-        height: 45px;
-        font-size: 16px !important;
+    /* Kayıt sliderları mobilde çok bitişik olmasın */
+    #konumSliderListesi div {
+        margin-bottom: 15px;
     }
 }
 
