@@ -367,21 +367,30 @@
                 left: 0;
             }
 
-            #haberler-content-wrapper {
-                 flex-direction: column;
-            }
-            #news-list-container {
-                border-right: none;
-                padding-right: 0;
-                margin-right: 0;
-                min-width: unset;
-                width: 100%;
-                border-bottom: 1px solid #eee;
-                margin-bottom: 20px;
-            }
-            #news-detail-container {
-                width: 100%;
-            }
+            @media (max-width: 768px) {
+    /* Haber listesi ve detayını alt alta getirir */
+    #haberler-content-wrapper {
+        flex-direction: column !important;
+    }
+
+    #news-list-container {
+        width: 100% !important;
+        border-right: none !important;
+        border-bottom: 1px solid #eee;
+        margin-right: 0 !important;
+        padding-right: 0 !important;
+        margin-bottom: 20px;
+    }
+
+    #news-detail-container {
+        width: 100% !important;
+    }
+
+    .news-item-title {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
 
 
             .slider-container {
@@ -439,7 +448,7 @@
         </div>
     </div>
 
-    <div class="custom-slide" style="background-image: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.2)), url('https://www.derapvc.com.tr/user/files/72155.jpg');">
+    <div class="custom-slide" style="background-image: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.2)), url('https://www.derapvc.com.tr/user/files/70256.jpg');">
         <div class="custom-content">
             <h1 style="font-size: 42px; color: #fff; margin-bottom: 15px; font-family: sans-serif;">Dört Mevsim Performans</h1>
             <p style="color: #eee; font-size: 18px; margin-bottom: 25px; font-family: sans-serif;">Yazın Serin, Kışın Sıcak Bir Yuva</p>
