@@ -611,12 +611,22 @@
     .sag { right: 20px; }
 
     /* --- MOBİL UYUM --- */
-    @media (max-width: 768px) {
-        .dera-slider { height: 350px; } /* Mobilde yükseklik azaldı */
-        .dera-slide-content h1 { font-size: 26px; }
-        .dera-slide-content p { font-size: 15px; }
-        .slider-ok { width: 35px; height: 35px; font-size: 15px; }
+    /* Mobilde slider altındaki siyah boşluğu yok eder */
+@media (max-width: 768px) {
+    #banner-wrapper {
+        height: 350px !important; /* Masaüstündeki 550px'i burada düşürüyoruz */
+        min-height: 350px !important;
     }
+
+    .dera-slider {
+        height: 350px !important; /* Slider iç alanını da eşitliyoruz */
+    }
+
+    /* Eğer hala boşluk kalırsa, slider içindeki resimlerin tam oturduğundan emin oluyoruz */
+    .dera-slide {
+        height: 100% !important;
+    }
+}
 </style>
 
 <script>
