@@ -916,6 +916,92 @@
 </section>
 
 
+<style>
+    .dera-why-us {
+        background: #1a1a1a; /* Koyu, asil bir arka plan */
+        padding: 80px 20px;
+        color: #fff;
+        font-family: 'Segoe UI', sans-serif;
+    }
+    .why-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+    }
+    .why-item {
+        text-align: center;
+        padding: 20px;
+        transition: 0.3s;
+    }
+    .why-item:hover {
+        transform: translateY(-10px);
+    }
+    .why-icon {
+        width: 70px;
+        height: 70px;
+        background: #cc0000;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 30px;
+        box-shadow: 0 5px 20px rgba(204, 0, 0, 0.4);
+    }
+    .why-item h3 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        color: #fff;
+        text-transform: uppercase;
+    }
+    .why-item p {
+        font-size: 14px;
+        color: #ccc;
+        line-height: 1.6;
+    }
+
+    /* Mobilde 2'li veya 1'li düzen */
+    @media (max-width: 992px) {
+        .why-container { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+        .why-container { grid-template-columns: 1fr; }
+        .dera-why-us { padding: 50px 20px; }
+    }
+</style>
+
+<section class="dera-why-us">
+    <div class="why-container">
+        
+        <div class="why-item">
+            <div class="why-icon">🏗️</div>
+            <h3>Yüksek Teknoloji</h3>
+            <p>Murat Makine robotik üretim hattımız ile düşük hata payı ile seri üretim yapıyoruz.</p>
+        </div>
+
+        <div class="why-item">
+            <div class="why-icon">🛡️</div>
+            <h3>Maksimum Yalıtım</h3>
+            <p>81mm Safir serisi ve 3 conta sistemimiz ile ısı ve ses yalıtımında Türkiye standartlarını aşuyoruz.</p>
+        </div>
+
+        <div class="why-item">
+            <div class="why-icon">🌍</div>
+            <h3>Global İhracat</h3>
+            <p>Kayseri'den yola çıkarak İspanya'dan Afrika'ya 50'den fazla ülkeye Dera kalitesini taşıyoruz.</p>
+        </div>
+
+        <div class="why-item">
+            <div class="why-icon">⚡</div>
+            <h3>Hızlı Teslimat</h3>
+            <p>Günlük 120 adet hazır pencere üretim kapasitemizle projelerinizi zamanında ve eksiksiz teslim ediyoruz.</p>
+        </div>
+
+    </div>
+</section>
 
 
 <style>
@@ -1980,8 +2066,7 @@
                 </div>
 
                 <h4 style="margin-top: 25px;">Müşteri Danışma Hattı</h4>
-                <p class="large-number">+90 352 326 22 64</p> 
-                <p>+90 352 225 00 23</p>
+                <p class="large-number">+90 352 225 00 23</p> 
                 <p>+90 532 583 18 85</p>
             </div>
         </div>
