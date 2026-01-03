@@ -368,7 +368,58 @@
             }
 
 
+@media (max-width: 768px) {
+    /* 1. Sayfanın sağa sola kaymasını kökten engelle */
+    html, body {
+        overflow-x: hidden !important;
+        position: relative;
+    }
 
+    /* 2. Fiyat bölümünü ekrana hapse et */
+    #fiyat {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        padding: 5px !important;
+        margin: 10px 0 !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+
+    /* 3. İçerideki tüm flex yapılarını dikey yap */
+    #fiyat > div > div {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 10px !important;
+        gap: 20px !important;
+    }
+
+    /* 4. Çizim alanındaki o taşan 400px ve 60px'i zorla ez */
+    #fiyat div[style*="flex: 1.6"] {
+        width: 100% !important;
+        min-width: unset !important;
+        padding: 60px 0 !important; /* Ölçüler için alan bırak */
+        transform: scale(0.8); /* Çizimi küçült ama JS'yi bozma */
+        transform-origin: center center;
+    }
+
+    /* 5. Ölçü etiketlerini (okları) ekrana yaklaştır */
+    #etiketW { top: -35px !important; }
+    #etiketH { left: -45px !important; }
+
+    /* 6. Form/Seçim alanını tam genişlik yap */
+    #fiyat div[style*="flex: 1"] {
+        width: 100% !important;
+        min-width: unset !important;
+        max-height: unset !important;
+    }
+
+    /* Inputların sağdan taşmasını engelle */
+    #fiyat input, #fiyat select {
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
 
 
 
