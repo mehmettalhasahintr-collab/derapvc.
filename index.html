@@ -1876,82 +1876,91 @@ function f_degis() {
 
 
 <style>
-    #derai-wrapper { position: fixed; bottom: 30px; right: 30px; z-index: 999999; font-family: 'Segoe UI', system-ui, sans-serif; }
+    #derai-wrapper { position: fixed; bottom: 30px; right: 30px; z-index: 999999; font-family: 'Segoe UI', Arial, sans-serif; }
     #derai-trigger {
         width: 70px; height: 70px; background: #cc0000; border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
         cursor: pointer; box-shadow: 0 10px 30px rgba(204, 0, 0, 0.4);
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        border: 2px solid rgba(255,255,255,0.2);
+        transition: all 0.3s ease; border: 2px solid #fff;
     }
-    #derai-trigger:hover { transform: scale(1.1) rotate(5deg); background: #1a1a1a; }
+    #derai-trigger:hover { transform: scale(1.1); background: #1a1a1a; }
     #derai-box {
         width: 400px; height: 600px; background: #fff; border-radius: 25px;
         display: none; flex-direction: column; overflow: hidden;
-        box-shadow: 0 25px 80px rgba(0,0,0,0.35); border: 1px solid #ddd;
-        position: absolute; bottom: 90px; right: 0; animation: deraiPop 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        box-shadow: 0 25px 80px rgba(0,0,0,0.3); border: 1px solid #ddd;
+        position: absolute; bottom: 90px; right: 0; animation: deraiSlide 0.4s ease;
     }
-    @keyframes deraiPop { from { opacity:0; transform: scale(0.9) translateY(40px); } to { opacity:1; transform: scale(1) translateY(0); } }
+    @keyframes deraiSlide { from { opacity:0; transform: translateY(40px); } to { opacity:1; transform: translateY(0); } }
     #derai-head { background: #1a1a1a; color: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #cc0000; }
-    #derai-body { flex: 1; padding: 20px; overflow-y: auto; background: #fdfdfd; display: flex; flex-direction: column; gap: 15px; scroll-behavior: smooth; }
-    .dr-msg { padding: 14px 18px; border-radius: 20px; font-size: 14px; line-height: 1.6; max-width: 85%; }
-    .dr-bot { background: #f1f1f1; color: #1a1a1a; align-self: flex-start; border-bottom-left-radius: 2px; border: 1px solid #e0e0e0; }
-    .dr-user { background: #cc0000; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; box-shadow: 0 4px 10px rgba(204,0,0,0.2); }
-    #derai-input-wrap { padding: 18px; background: #fff; border-top: 1px solid #eee; display: flex; gap: 12px; }
-    #derai-input { flex: 1; border: 1.5px solid #eee; padding: 12px 20px; border-radius: 30px; outline: none; font-size: 14px; background: #f9f9f9; transition: 0.3s; }
-    #derai-input:focus { border-color: #cc0000; background: #fff; }
-    #derai-send { background: #cc0000; color: white; border: none; width: 48px; height: 48px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
-    #derai-send:hover { background: #1a1a1a; transform: scale(1.05); }
-    @media (max-width: 480px) { #derai-box { width: 92vw; height: 80vh; right: -5vw; } }
+    #derai-body { flex: 1; padding: 20px; overflow-y: auto; background: #fdfdfd; display: flex; flex-direction: column; gap: 15px; }
+    .dr-msg { padding: 14px; border-radius: 18px; font-size: 14px; line-height: 1.6; max-width: 85%; }
+    .dr-bot { background: #f1f1f1; color: #1a1a1a; align-self: flex-start; border-bottom-left-radius: 2px; border: 1px solid #eee; }
+    .dr-user { background: #cc0000; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
+    #derai-input-wrap { padding: 15px; background: #fff; border-top: 1px solid #eee; display: flex; gap: 10px; }
+    #derai-input { flex: 1; border: 1.5px solid #eee; padding: 12px; border-radius: 30px; outline: none; }
+    #derai-send { background: #cc0000; color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; }
 </style>
 
 <div id="derai-wrapper">
     <div id="derai-box">
         <div id="derai-head">
-            <div style="display:flex; align-items:center; gap:12px;">
-                <div style="width:12px; height:12px; background:#00ff00; border-radius:50%; box-shadow: 0 0 10px #00ff00;"></div>
-                <div>
-                    <div style="font-weight:700; font-size:15px;">DERAI</div>
-                    <div style="font-size:10px; opacity:0.6; text-transform:uppercase;">Kurumsal Bilgi Sistemi</div>
-                </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+                <div style="width:10px; height:10px; background:#00ff00; border-radius:50%; box-shadow: 0 0 8px #00ff00;"></div>
+                <span style="font-weight:700; font-size:16px;">DERAI KURUMSAL</span>
             </div>
-            <span onclick="toggleDerai()" style="cursor:pointer; font-size:26px; line-height:1;">&times;</span>
+            <span onclick="toggleDerai()" style="cursor:pointer; font-size:24px;">&times;</span>
         </div>
         <div id="derai-body">
-            <div class="dr-msg dr-bot">Merhaba, Dera PVC Kurumsal Asistanı DERAI aktif. 2012'den bugüne uzanan tarihçemiz, robotik üretim tesisimiz, PRO7006/8106 serilerimiz veya ihracat ağımız hakkında tüm sorularınızı cevaplamaya hazırım.</div>
+            <div class="dr-msg dr-bot">Sayın Ziyaretçimiz, Dera PVC Bilgi Sistemine hoş geldiniz. Şirketimiz, ürün serilerimiz ve üretim teknolojilerimiz hakkındaki tüm sorularınızı resmi verilerimiz doğrultusunda yanıtlamaya hazırım.</div>
         </div>
-        <div id="derai-form-area">
-            <div id="derai-input-wrap">
-                <input type="text" id="derai-input" placeholder="Dera PVC hakkında her şeyi sorabilirsiniz...">
-                <button id="derai-send" onclick="askDerai()">
-                    <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-                </button>
-            </div>
+        <div id="derai-input-wrap">
+            <input type="text" id="derai-input" placeholder="Soru sorun (Örn: PRO8106 özellikleri nedir?)...">
+            <button id="derai-send" onclick="askDerai()">➤</button>
         </div>
     </div>
     <div id="derai-trigger" onclick="toggleDerai()">
-        <svg viewBox="0 0 24 24" width="36" height="36" fill="white">
-            <path d="M12,2A10,10,0,0,0,2,12a9.89,9.89,0,0,0,2.26,6.33l-2,2a1,1,0,0,0-.21,1.09A1,1,0,0,0,3,22h9A10,10,0,0,0,12,2Zm0,18H5.41l.3-.3a1,1,0,0,0,0-1.41A8,8,0,1,1,12,20Zm4-8a1,1,0,0,1-1,1H9a1,1,0,0,1,0-2h6A1,1,0,0,1,16,12Zm-2-4a1,1,0,0,1-1,1H9A1,1,0,0,1,9,7h4A1,1,0,0,1,14,8Zm-3,8a1,1,0,0,1-1,1H9a1,1,0,0,1,0-2h1A1,1,0,0,1,11,16Z"/>
-        </svg>
+        <svg viewBox="0 0 24 24" width="36" height="36" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.91.53 3.69 1.45 5.21l-1.45 4.79 4.79-1.45C8.31 21.47 10.09 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
     </div>
 </div>
 
 <script>
-    const deraiFullBrain = [
-        { keys: ["kuruluş", "tarih", "ne zaman", "kuruldu", "2012", "eski"], text: "Dera PVC, 8 Şubat 2012'de Kayseri Ambar Sanayi bölgesinde kurulmuştur. 1000m2 açık, 750m2 kapalı alanla başlayıp dev bir üretim tesisine dönüşmüştür." },
-        { keys: ["pro7006", "ultra", "70mm", "6 odacıklı"], text: "PRO7006 Ultra Seri, 70mm genişliğinde ve 6 odacıklıdır. 48mm yüksek kasası ve %100 su sızdırmazlık özelliğiyle maksimum enerji tasarrufu sağlar." },
-        { keys: ["pro8106", "safir", "81mm", "3 conta"], text: "PRO8106 Safir Seri, 81mm genişliğe ve 3mm et kalınlığına sahiptir. Gerçek bariyerli 3 conta sistemiyle dünyanın en yüksek izolasyon standartlarını sunar." },
-        { keys: ["könig", "konig"], text: "König, Dera PVC'nin kendi adına ürettiği tescilli markasıdır. Estetik, dayanıklılık ve modern mimariye uygunluğuyla bilinir." },
-        { keys: ["makine", "murat", "robot", "teknoloji"], text: "Üretim hattımızda Murat Makine'nin son teknoloji ürünü robotları kullanılmaktadır. Tamamen robotik sistemle hata payı sıfıra indirilmiştir." },
-        { keys: ["kapasite", "günlük", "kaç adet"], text: "Robotik üretim tesisimizde günlük ortalama 120 adet hazır pencere üretme kapasitesine sahibiz." },
-        { keys: ["ekip", "çalışan", "eleman", "kadro"], text: "Firmamız bünyesinde 25 kişilik, kendi alanında uzman ve profesyonel bir ekip görev yapmaktadır." },
-        { keys: ["ihracat", "yurt dışı", "ülke", "ispanya", "afrika"], text: "Yıllık ihracatımız 50 tırın üzerindedir. Başta İspanya, Afrika ülkeleri ve Balkanlar olmak üzere dünya geneline satış yapmaktayız." },
-        { keys: ["vizyon", "misyon", "hedef"], text: "Vizyonumuz, nesilden nesile aktarılacak sonsuz ömürlü bir kuruluş olmak; misyonumuz ise kaliteli ürün-mutlu müşteri ilkesiyle dünya standartlarında hizmet vermektir." },
-        { keys: ["panel", "sandwich", "kapı paneli"], text: "Diyarbakır fabrikamızda Sandwich Panel ve dekoratif kapı panelleri üretimi yapılmaktadır." },
-        { keys: ["başka ne", "diğer", "duşakabin", "panjur", "cam balkon"], text: "PVC sistemleri dışında; Panjur, Garaj Kapısı, Cam Balkon ve Duşakabin gibi tamamlayıcı yapı sistemlerinde de hizmet veriyoruz." },
-        { keys: ["belge", "tse", "ce", "ral", "standart"], text: "Ürünlerimiz CE etiketli olup, TSE ve Alman RAL standartlarına tam uyumludur." },
-        { keys: ["showroom", "mağaza", "görmek"], text: "Kayseri şehir merkezinde modern ve geniş bir Showroomumuz bulunmaktadır; ürünlerimizi orada inceleyebilirsiniz." },
-        { keys: ["fiyat", "maliyet", "teklif"], text: "Fiyatlar; seçilen seriye (7006/8106) ve ölçüye göre değişir. Menüdeki 'Fiyat' sekmesinden anlık hesaplama yapabilirsiniz." }
+    // TÜM SİTE VERİSİ (Knowledge Base)
+    const siteData = [
+        {
+            category: "Kurumsal",
+            matches: ["kim", "hakkında", "tarih", "ne zaman", "kuruldu", "2012", "firma", "şirket"],
+            response: "Dera PVC, 8 Şubat 2012 tarihinde Kayseri Ambar Sanayi Bölgesi'nde kurulmuştur. 2019 yılı itibarıyla üretim kapasitesini dev bir tesis seviyesine taşıyarak global bir marka haline gelmiştir."
+        },
+        {
+            category: "Üretim ve Teknoloji",
+            matches: ["robot", "makine", "nasıl", "kapasite", "günlük", "üretim", "teknoloji", "murat makine"],
+            response: "Üretimimiz, Murat Makine'nin tam otomatik robotik sistemleri ile hatasız olarak gerçekleştirilmektedir. Günlük 120 adet hazır pencere üretim kapasitemiz mevcuttur."
+        },
+        {
+            category: "İhracat",
+            matches: ["ihracat", "yurt dışı", "yurtdışı", "ülke", "global", "ispanya", "afrika", "balkan", "satış"],
+            response: "Dera PVC, aktif bir ihracatçıdır. Yıllık 50 tırın üzerinde ürün sevkiyatı ile başta İspanya, Afrika ülkeleri ve Balkanlar olmak üzere dünya genelinde birçok noktaya hizmet vermekteyiz."
+        },
+        {
+            category: "PRO8106 Safir",
+            matches: ["8106", "safir", "premium", "3 conta", "81mm", "en iyi"],
+            response: "PRO8106 Safir Seri, 81mm genişliğinde ve gerçek bariyerli 3 conta sistemine sahiptir. 'Saraylara layık yalıtım' sunan bu serimiz, en yüksek ısı ve ses izolasyonu değerlerine sahiptir."
+        },
+        {
+            category: "PRO7006 Ultra",
+            matches: ["7006", "ultra", "70mm", "6 odacıklı", "su sızdırmaz"],
+            response: "PRO7006 Ultra Seri, 70mm genişlik ve 6 odacıklı yapısıyla %100 su sızdırmazlık ve yüksek tasarruf sağlayan, fiyat-performans odaklı sistemimizdir."
+        },
+        {
+            category: "Hizmet Alanları",
+            matches: ["başka", "neler", "panjur", "garaj", "cam balkon", "duşakabin", "panel", "sandwich"],
+            response: "Ana profil üretimimizin yanı sıra; Sandwich Panel (Diyarbakır tesisimiz), Panjur, Garaj Kapıları, Cam Balkon ve Duşakabin sistemlerinde de profesyonel üretim yapmaktayız."
+        },
+        {
+            category: "Lokasyon",
+            matches: ["nerede", "adres", "konum", "showroom", "kayseri", "ambar"],
+            response: "Merkez fabrikamız Kayseri Ambar Sanayi Bölgesi'ndedir. Ayrıca Kayseri şehir merkezinde ürünlerimizi inceleyebileceğiniz modern bir showroomumuz bulunmaktadır."
+        }
     ];
 
     function toggleDerai() {
@@ -1960,26 +1969,29 @@ function f_degis() {
     }
 
     function askDerai() {
-        const input = document.getElementById('derai-input');
+        const inp = document.getElementById('derai-input');
         const body = document.getElementById('derai-body');
-        const rawText = input.value.trim();
-        const lowText = rawText.toLowerCase();
-        
-        if (!rawText) return;
+        const query = inp.value.trim().toLowerCase();
 
-        body.innerHTML += `<div class="dr-msg dr-user">${rawText}</div>`;
-        input.value = "";
-        
+        if (!query) return;
+
+        body.innerHTML += `<div class="dr-msg dr-user">${inp.value}</div>`;
+        inp.value = "";
+
         setTimeout(() => {
-            let found = deraiFullBrain.find(item => item.keys.some(k => lowText.includes(k)));
-            let reply = found ? found.text : "Sayın müşterimiz, bu konuda daha detaylı bilgi verebilmem için 'PRO8106', 'İhracat', 'Üretim Kapasitesi' veya 'Kuruluş' gibi konular hakkında soru sorabilirsiniz. Teknik bir sorunuz varsa lütfen belirtiniz.";
+            // "Zeki" Arama Algoritması: Cümlenin içindeki anlamı tarar
+            let found = siteData.find(section => 
+                section.matches.some(keyword => query.includes(keyword))
+            );
+
+            let reply = found ? found.response : "İletmiş olduğunuz konuyu kurumsal veri tabanımda tam olarak eşleştiremedim. Lütfen ürün serilerimiz (PRO8106/7006), üretim kapasitemiz, ihracat ağımız veya iletişim bilgilerimiz hakkında daha spesifik bir soru sorunuz.";
             
             body.innerHTML += `<div class="dr-msg dr-bot">${reply}</div>`;
             body.scrollTop = body.scrollHeight;
-        }, 600);
+        }, 500);
     }
 
-    document.getElementById('derai-input').addEventListener('keypress', (e) => { if (e.key === 'Enter') askDerai(); });
+    document.getElementById('derai-input').addEventListener('keypress', (e) => { if(e.key==='Enter') askDerai(); });
 </script>
 
 
