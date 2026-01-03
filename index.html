@@ -499,7 +499,7 @@
                     <li><a href="#" onclick="showContent('hakkimizda'); return false;">Misyon ve Vizyon</a></li>
                 </ul>
             </li>
-            <li><a href="#ürünler" onclick="showContent('urunler'); showProductCategory('pvc'); return false;">Ürünler</a></li>
+            <li><a href="#urunler" onclick="showContent('urunler'); showProductCategory('pvc'); return false;">Ürünler</a></li>
             <li><a href="#haberler" onclick="showContent('haberler'); showNewsDetail('haber1'); return false;">Haberler</a></li>
             <li><a href="#referanslar" onclick="showContent('referanslar'); return false;">Referanslarımız</a></li>
             <li><a href="#bayiler" onclick="showContent('bayiler'); return false;">Bayilerimiz</a></li>
@@ -2336,6 +2336,11 @@ function showContent(id) {
         target.style.setProperty('display', 'block', 'important');
     }
 
+    // --- KRİTİK EKLEME BURASI ---
+    // Adres çubuğuna bölüm adını yazar (örn: derapvc.com.tr/#urunler)
+    window.history.pushState(null, null, '#' + id);
+    // ----------------------------
+
     // 3. Menüyü kapat (ID'si dropdownMenu ise)
     var menu = document.getElementById('dropdownMenu');
     if (menu) {
@@ -2473,6 +2478,26 @@ function f_degis() {
     }
     document.getElementById('derai-input').addEventListener('keypress', (e) => { if(e.key==='Enter') askDerai(); });
 </script>
+
+
+
+<script>
+window.addEventListener('load', function() {
+    // Sayfa açıldığında URL'de # işareti varsa (örn: #fiyat)
+    var hash = window.location.hash.replace('#', '');
+    
+    if (hash) {
+        // Senin yeni showContent fonksiyonunu çağırır
+        showContent(hash);
+        
+        // Eğer ürünlerse alt kategoriyi de açar
+        if (hash === 'urunler' && typeof showProductCategory === "function") {
+            showProductCategory('pvc');
+        }
+    }
+});
+</script>
+
 
 
 </body>
