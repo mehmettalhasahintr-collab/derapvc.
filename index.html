@@ -650,6 +650,107 @@
     });
 </script>
 </div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+    /* Bölüm Tasarımı */
+    .dera-stats-section {
+        background-color: #fcfcfc;
+        padding: 80px 20px;
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .dera-stats-section h2 {
+        font-size: 36px;
+        color: #1a1a1a;
+        margin-bottom: 50px;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+    .dera-stats-section h2::after {
+        content: ''; display: block; width: 60px; height: 4px; background: #cc0000; margin: 15px auto;
+    }
+    .dera-stats-grid {
+        display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; max-width: 1200px; margin: 0 auto;
+    }
+    .dera-stat-item {
+        background: #fff; border-radius: 15px; padding: 40px 20px; flex: 1; min-width: 200px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-bottom: 4px solid #cc0000;
+        transition: 0.3s;
+    }
+    .dera-stat-item:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(204,0,0,0.1); }
+    .dera-stat-icon { font-size: 40px; color: #cc0000; margin-bottom: 15px; }
+    .dera-stat-number { font-size: 48px; font-weight: 800; color: #1a1a1a; margin-bottom: 5px; }
+    .dera-stat-label { font-size: 16px; color: #666; font-weight: 600; text-transform: uppercase; }
+
+    @media (max-width: 768px) {
+        .dera-stats-grid { flex-direction: column; align-items: center; }
+        .dera-stat-item { width: 100%; max-width: 300px; }
+    }
+</style>
+
+<section class="dera-stats-section">
+    <h2>Sayılarla Dera PVC</h2>
+    <div class="dera-stats-grid">
+        <div class="dera-stat-item">
+            <div class="dera-stat-icon"><i class="fas fa-users"></i></div>
+            <div class="dera-stat-number" data-target="9500">0</div>
+            <div class="dera-stat-label">Mutlu Müşteri</div>
+        </div>
+        <div class="dera-stat-item">
+            <div class="dera-stat-icon"><i class="fas fa-globe-americas"></i></div>
+            <div class="dera-stat-number" data-target="50">0</div>
+            <div class="dera-stat-label">İhracat Ülkesi</div>
+        </div>
+        <div class="dera-stat-item">
+            <div class="dera-stat-icon"><i class="fas fa-city"></i></div>
+            <div class="dera-stat-number" data-target="250">0</div>
+            <div class="dera-stat-label">İnşaat Projesi</div>
+        </div>
+        <div class="dera-stat-item">
+            <div class="dera-stat-icon"><i class="fas fa-history"></i></div>
+            <div class="dera-stat-number" data-target="13">0</div>
+            <div class="dera-stat-label">Yıllık Tecrübe</div>
+        </div>
+    </div>
+</section>
+
+<script>
+    (function() {
+        const stats = document.querySelectorAll('.dera-stat-number');
+        const observerOptions = { threshold: 0.5 };
+
+        const startCounting = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const countTo = parseInt(target.getAttribute('data-target'));
+                    let current = 0;
+                    const increment = countTo / 50; 
+
+                    const updateCount = () => {
+                        current += increment;
+                        if (current < countTo) {
+                            target.innerText = Math.ceil(current);
+                            setTimeout(updateCount, 30);
+                        } else {
+                            target.innerText = countTo + (countTo === 13 ? "+" : "");
+                        }
+                    };
+                    updateCount();
+                    observer.unobserve(target);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(startCounting, observerOptions);
+        stats.forEach(stat => observer.observe(stat));
+    })();
+</script>
+
+
         <div class="logo-section">
             <img src="https://derapvc.com.tr/tema/dera/img/logo.png" alt="Dera Logo">
             <img src="https://www.derapvc.com.tr/tema/dera/img/konig.png" alt="Konig Logo">
