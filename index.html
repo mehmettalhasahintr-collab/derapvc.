@@ -821,6 +821,154 @@
 
 
 
+
+<style>
+    .dera-products-carousel { 
+        background: #fdfdfd; 
+        padding: 80px 0; 
+        overflow: hidden; 
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+    .dera-products-carousel h2 { 
+        text-align: center; 
+        font-size: 34px; 
+        color: #1a1a1a; 
+        margin-bottom: 50px; 
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+    .dera-products-carousel h2 span { color: #cc0000; }
+
+    /* Kaydırma Bandı */
+    .dera-track {
+        display: flex;
+        width: calc(300px * 14); /* Ürün sayısı x 2 (Sonsuz döngü için) */
+        animation: deraSlide 40s linear infinite;
+    }
+
+    .dera-track:hover { animation-play-state: paused; }
+
+    .dera-card {
+        width: 280px;
+        margin: 0 15px;
+        background: #fff;
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        border: 1px solid #eee;
+        transition: all 0.4s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .dera-card:hover {
+        border-color: #cc0000;
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(204,0,0,0.12);
+    }
+
+    .dera-img-box {
+        height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        background: #f9f9f9;
+        border-radius: 12px;
+    }
+
+    .dera-img-box img {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+    }
+
+    .dera-name { font-size: 18px; font-weight: 800; color: #111; margin-bottom: 8px; }
+    .dera-tag { font-size: 12px; color: #cc0000; font-weight: 700; text-transform: uppercase; margin-bottom: 15px; display: block; }
+    
+    .dera-btn {
+        display: inline-block;
+        padding: 9px 22px;
+        background: #1a1a1a;
+        color: #fff;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: 0.3s;
+    }
+    .dera-btn:hover { background: #cc0000; }
+
+    @keyframes deraSlide {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(calc(-310px * 7)); } /* 7 ürün sonra başa sarar */
+    }
+
+    @media (max-width: 768px) {
+        .dera-card { width: 240px; }
+        .dera-products-carousel h2 { font-size: 26px; }
+    }
+</style>
+
+<section class="dera-products-carousel">
+    <h2>Ürün <span>Yelpazemiz</span></h2>
+    
+    <div class="dera-track">
+
+        <div class="dera-card">
+            <div class="dera-img-box"><img src="https://www.derapvc.com.tr/user/files/178897.png" alt="PRO8106" onerror="this.src='https://via.placeholder.com/250x200?text=PRO8106+SAFIR'"></div>
+            <span class="dera-tag">81mm / 3 Conta</span>
+            <div class="dera-name">PRO8106 SAFİR SERİ</div>
+            <a href="#" class="dera-btn">İncele</a>
+        </div>
+
+        <div class="dera-card">
+            <div class="dera-img-box"><img src="https://www.derapvc.com.tr/user/files/164728.png" alt="König" onerror="this.src='https://via.placeholder.com/250x200?text=KONIG+SERI'"></div>
+            <span class="dera-tag">Özel Tasarım</span>
+            <div class="dera-name">KÖNİG SERİ</div>
+            <a href="#" class="dera-btn">İncele</a>
+        </div>
+
+        <div class="dera-card">
+            <div class="dera-img-box"><img src="https://www.derapvc.com.tr/user/files/69090.jpg" alt="Sürme" onerror="this.src='https://via.placeholder.com/250x200?text=SURME+SISTEMLERI'"></div>
+            <span class="dera-tag">Konforlu Geçiş</span>
+            <div class="dera-name">YENİ SÜRME SİSTEMLERİ</div>
+            <a href="#" class="dera-btn">İncele</a>
+        </div>
+
+        <div class="dera-card">
+            <div class="dera-img-box"><img src="https://www.derapvc.com.tr/user/files/69118.jpg" alt="Panjur" onerror="this.src='https://via.placeholder.com/250x200?text=PANJUR+SISTEMLERI'"></div>
+            <span class="dera-tag">Güvenlik & Gölge</span>
+            <div class="dera-name">PANJUR SİSTEMLERİ</div>
+            <a href="#" class="dera-btn">İncele</a>
+        </div>
+
+        <div class="dera-card">
+            <div class="dera-img-box"><img src="https://www.derapvc.com.tr/user/files/70473.jpg" alt="Cam Balkon" onerror="this.src='https://via.placeholder.com/250x200?text=CAM+BALKON'"></div>
+            <span class="dera-tag">4 Mevsim Keyif</span>
+            <div class="dera-name">CAM BALKON SİSTEMLERİ</div>
+            <a href="#" class="dera-btn">İncele</a>
+        </div>
+
+        <div class="dera-card">
+            <div class="dera-img-box"><img src="https://www.derapvc.com.tr/user/files/70475.jpg" alt="Sineklik" onerror="this.src='https://via.placeholder.com/250x200?text=SINEKLIK+SISTEMLERI'"></div>
+            <span class="dera-tag">Pratik Çözüm</span>
+            <div class="dera-name">SİNEKLİK SİSTEMLERİ</div>
+            <a href="#" class="dera-btn">İncele</a>
+        </div>
+
+        <div class="dera-card">
+            <div class="dera-img-box"><img src="https://www.derapvc.com.tr/user/files/178896.PNG" alt="PRO7006"></div>
+            <span class="dera-tag">70mm / 6 Odacıklı</span>
+            <div class="dera-name">PRO7006 ULTRA SERİ</div>
+            <a href="#" class="dera-btn">İncele</a>
+        </div>
+        </div>
+</section>
+
+
+
+
+
         <div class="logo-section">
             <img src="https://derapvc.com.tr/tema/dera/img/logo.png" alt="Dera Logo">
             <img src="https://www.derapvc.com.tr/tema/dera/img/konig.png" alt="Konig Logo">
