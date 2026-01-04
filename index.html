@@ -2401,62 +2401,40 @@ function f_degis() {
 
 
 <style>
-    #derai-wrapper { position: fixed; bottom: 20px; right: 20px; z-index: 999999; font-family: 'Segoe UI', Tahoma, sans-serif; }
-    
-    /* Hareketli ve Şık Açılış Butonu */
+    #derai-wrapper { position: fixed; bottom: 20px; right: 20px; z-index: 999999; font-family: 'Segoe UI', sans-serif; }
     #derai-trigger {
         width: 65px; height: 65px; background: #cc0000; border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
-        cursor: pointer; box-shadow: 0 8px 25px rgba(204, 0, 0, 0.4);
-        transition: all 0.3s ease; border: 2px solid #fff;
+        cursor: pointer; box-shadow: 0 8px 25px rgba(204,0,0,0.4); border: 2px solid #fff;
     }
-    #derai-trigger:hover { transform: scale(1.05); background: #1a1a1a; }
-
-    /* Ana Pencere - Mobilde Genişlik Otomatiktir */
     #derai-box {
-        width: 380px; max-width: 90vw; height: 550px; max-height: 80vh; 
-        background: #fff; border-radius: 20px; display: none; flex-direction: column; 
-        overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); 
-        border: 1px solid #ddd; position: absolute; bottom: 80px; right: 0; 
-        animation: deraiIn 0.3s ease-out;
+        width: 400px; max-width: 90vw; height: 550px; background: #fff; 
+        border-radius: 20px; display: none; flex-direction: column; 
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3); border: 1px solid #ddd;
+        position: absolute; bottom: 80px; right: 0; animation: deraiIn 0.3s ease-out;
     }
-
     @keyframes deraiIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-    #derai-head { background: #1a1a1a; color: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid #cc0000; }
-    #derai-body { flex: 1; padding: 15px; overflow-y: auto; background: #f9f9f9; display: flex; flex-direction: column; gap: 12px; }
-    
-    .dr-msg { padding: 12px 15px; border-radius: 15px; font-size: 14px; line-height: 1.5; word-wrap: break-word; }
-    .dr-bot { background: #eee; color: #111; align-self: flex-start; border-bottom-left-radius: 2px; }
-    .dr-user { background: #cc0000; color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
-
-    #derai-footer { padding: 12px; background: #fff; border-top: 1px solid #eee; display: flex; gap: 8px; }
-    #derai-input { flex: 1; border: 1px solid #ddd; padding: 10px 15px; border-radius: 25px; outline: none; font-size: 14px; width: 100%; }
-    #derai-send { background: #cc0000; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; flex-shrink: 0; }
-
-    /* MOBİL DÜZELTME: Ekran 480px'den küçükse ayarları değiştir */
-    @media (max-width: 480px) {
-        #derai-wrapper { bottom: 15px; right: 15px; }
-        #derai-box { width: 85vw; height: 70vh; bottom: 75px; right: 0; }
-        #derai-trigger { width: 55px; height: 55px; }
-    }
+    #derai-head { background: #1a1a1a; color: #fff; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 4px solid #cc0000; border-radius: 20px 20px 0 0; }
+    #derai-body { flex: 1; padding: 15px; overflow-y: auto; background: #fdfdfd; display: flex; flex-direction: column; gap: 10px; }
+    .dr-msg { padding: 12px; border-radius: 12px; font-size: 14px; max-width: 85%; line-height: 1.4; }
+    .dr-bot { background: #fff; border: 1px solid #eee; align-self: flex-start; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .dr-user { background: #cc0000; color: #fff; align-self: flex-end; }
+    #derai-footer { padding: 10px; border-top: 1px solid #eee; display: flex; gap: 5px; }
+    #derai-input { flex: 1; border: 1px solid #ddd; padding: 10px; border-radius: 20px; outline: none; }
 </style>
 
 <div id="derai-wrapper">
     <div id="derai-box">
         <div id="derai-head">
-            <div style="display:flex; align-items:center; gap:8px;">
-                <div style="width:10px; height:10px; background:#00ff00; border-radius:50%; box-shadow: 0 0 5px #00ff00;"></div>
-                <span style="font-weight:600; font-size:14px;">DERAI KURUMSAL</span>
-            </div>
+            <span style="font-weight:bold;">DERAI AKILLI ASİSTAN</span>
             <span onclick="toggleDerai()" style="cursor:pointer; font-size:24px;">&times;</span>
         </div>
         <div id="derai-body">
-            <div class="dr-msg dr-bot">Merhaba, DERAI Kurumsal Bilgi Sistemi aktif. Mobilde ve masaüstünde size yardımcı olmaya hazırım.</div>
+            <div class="dr-msg dr-bot">Selamün Aleyküm abi. Dera PVC fabrikasından ben. Safir seri, renkler, fiyatlar... Ne istersen sor, ustadan iyi bilirim.</div>
         </div>
         <div id="derai-footer">
-            <input type="text" id="derai-input" placeholder="Mesajınızı yazın...">
-            <button id="derai-send" onclick="askDerai()">➤</button>
+            <input type="text" id="derai-input" placeholder="Yaz abi, çekinme...">
+            <button onclick="askDerai()" style="background:#cc0000; color:white; border:none; width:40px; border-radius:50%; cursor:pointer;">➤</button>
         </div>
     </div>
     <div id="derai-trigger" onclick="toggleDerai()">
@@ -2465,38 +2443,58 @@ function f_degis() {
 </div>
 
 <script>
-    const dataBank = [
-        { keys: ["ihracat", "ülke", "yurt dışı", "ispanya", "afrika"], text: "Dera PVC, yıllık 50 tırın üzerinde ihracat kapasitesiyle İspanya, Afrika ve Balkanlar dahil birçok dünya ülkesine satış yapmaktadır." },
-        { keys: ["pro8106", "safir", "en iyi", "3 conta"], text: "PRO8106 Safir Seri, 81mm genişliğinde ve 3 conta sistemine sahip en prestijli yalıtım çözümümüzdür." },
-        { keys: ["pro7006", "ultra", "ekonomik", "70mm"], text: "PRO7006 Ultra Seri, 70mm genişlik ve 6 odacıklı yapısıyla yüksek enerji tasarrufu sağlayan ekonomik serimizdir." },
-        { keys: ["nerede", "adres", "konum", "kayseri", "ambar"], text: "Merkez fabrikamız Kayseri Ambar Sanayi bölgesindedir. Ayrıca şehir merkezinde showroomumuz bulunmaktadır." },
-        { keys: ["tarih", "kuruluş", "ne zaman", "2012"], text: "Dera PVC, 8 Şubat 2012 tarihinde Kayseri'de üretim hayatına başlamıştır." },
-        { keys: ["robot", "makine", "teknoloji"], text: "Üretimimiz Murat Makine robotik sistemleriyle tam otomatik olarak yapılmaktadır. Günlük 120 adet pencere kapasitemiz vardır." }
-    ];
+    const UstaZeka = {
+        renkler: ["Antrasit", "Siyah Füme", "Altın Meşe", "Ceviz", "Maun"],
+        
+        cevapVer: function(mesaj) {
+            let m = mesaj.toLowerCase().trim();
+            
+            // 1. TELEFON NUMARASI TANIMA (En kritik yer)
+            const telRegex = /(05|5)\d{9}/g;
+            if (telRegex.test(m.replace(/\s/g, ""))) {
+                return "<b>Abi numaranı aldım, not ettim.</b> Bizim ustalar seni en kısa sürede arayıp detayları konuşacaklar. Merak etme, işin ehli biziz.";
+            }
+
+            // 2. FİYAT VE MALİYET
+            if (m.match(/(fiyat|para|ne kadar|kaç|maliyet|hesap)/)) {
+                return "Fiyatlar m² üzerinden hesaplanır abi. PRO7006 ekonomiktir ama PRO8106 Safir seri (3 contalı) istersen biraz fark eder. En net rakam için sitemizdeki <b>Fiyat</b> sekmesine ölçü girersen şak diye hesaplar.";
+            }
+
+            // 3. RENK VE ESTETİK
+            if (m.match(/(renk|laminasyon|antrasit|füme|meşe|ceviz)/)) {
+                return "Renk seçeneğimiz gırla abi! " + this.renkler.join(", ") + " ne istersen var. Özellikle Antrasit ve Siyah Füme çok tutuluyor, eve bambaşka hava katar.";
+            }
+
+            // 4. TEKNİK KALİTE (SAFİR VS ULTRA)
+            if (m.match(/(safir|8106|kalite|sağlam|3 conta)/)) {
+                return "Bak abi, gerçek yalıtım istiyorsan <b>PRO8106 Safir</b> tek geçer. 3 contalıdır, rüzgarı bıçak gibi keser, Kayseri'nin ayazını içeri sokmaz.";
+            }
+
+            // 5. GENEL CEVAP
+            return "Anladım abi. PVC serileri, renkler veya ihracat işleri hakkında her şeyi bilirim. İstersen numaranı yaz (05xx... gibi), biz seni arayalım.";
+        }
+    };
 
     function toggleDerai() {
-        const box = document.getElementById('derai-box');
-        box.style.display = (box.style.display === 'flex') ? 'none' : 'flex';
-        if(box.style.display === 'flex') document.getElementById('derai-input').focus();
+        const b = document.getElementById('derai-box');
+        b.style.display = b.style.display === 'flex' ? 'none' : 'flex';
     }
 
     function askDerai() {
         const inp = document.getElementById('derai-input');
         const body = document.getElementById('derai-body');
-        const val = inp.value.trim().toLowerCase();
-        if (!val) return;
+        const val = inp.value.trim();
+        if(!val) return;
 
-        body.innerHTML += `<div class="dr-msg dr-user">${inp.value}</div>`;
+        body.innerHTML += `<div class="dr-msg dr-user">${val}</div>`;
         inp.value = "";
 
         setTimeout(() => {
-            let match = dataBank.find(d => d.keys.some(k => val.includes(k)));
-            let res = match ? match.text : "Bu konuda sistemde kayıtlı resmi bir bilgi bulamadım. Ürünlerimiz, ihracat ağımız veya iletişim bilgilerimiz hakkında sorularınızı yanıtlayabilirim.";
-            body.innerHTML += `<div class="dr-msg dr-bot">${res}</div>`;
+            const cevap = UstaZeka.cevapVer(val);
+            body.innerHTML += `<div class="dr-msg dr-bot">${cevap}</div>`;
             body.scrollTop = body.scrollHeight;
         }, 500);
     }
-    document.getElementById('derai-input').addEventListener('keypress', (e) => { if(e.key==='Enter') askDerai(); });
 </script>
 
 
