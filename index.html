@@ -1655,11 +1655,10 @@
 
         <div style="padding: 25px; display: flex; flex-wrap: wrap; gap: 30px;">
             
-            <div style="flex: 1.6; min-width: 400px; display: flex; flex-direction: column; align-items: center; background: #f8f9fa; border-radius: 12px; padding: 60px; position: relative; border: 1px solid #dee2e6;">
+            <div style="flex: 1.6; min-width: 350px; display: flex; flex-direction: column; align-items: center; background: #f8f9fa; border-radius: 12px; padding: 60px; position: relative; border: 1px solid #dee2e6;">
                 
                 <div id="pencereCerceve" style="border: 16px solid #fff; box-shadow: 0 15px 45px rgba(0,0,0,0.1); background: #90caf9; position: relative; display: block;">
                     <div id="bolmeContainer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></div>
-                    
                     <div id="kayitlarContainer" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10;"></div>
                     
                     <div id="etiketW" style="position: absolute; top: -50px; left: 50%; transform: translateX(-50%); font-weight: bold; color: #1a73e8; background: #fff; padding: 4px 10px; border-radius: 4px; border:1.5px solid #1a73e8;">150 cm</div>
@@ -1676,7 +1675,7 @@
             <div style="flex: 1; min-width: 320px; max-height: 850px; overflow-y: auto; padding-right: 10px;">
                 
                 <label style="font-size:12px; font-weight:bold; color:#444;">Profil Serisi</label>
-                <select id="f_seri" onchange="arayuzSifirla()" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px;">
+                <select id="f_seri" onchange="arayuzSifirla()" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:1px solid #ccc;">
                     <option value="1850">PRO7006 (1850 TL/m²)</option>
                     <option value="2300">PRO8106 (2300 TL/m²)</option>
                     <option value="2750">KÖNİG (2750 TL/m²)</option>
@@ -1705,7 +1704,7 @@
                 </div>
 
                 <div id="kayitKonumAyarlari" style="background: #fff3e0; padding: 12px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #ffe0b2;">
-                    <h4 style="margin:0 0-10px 0; font-size:13px; color:#e65100;">Kayıt Ölçülerini Düzenle</h4>
+                    <h4 style="margin:0 0 -10px 0; font-size:13px; color:#e65100;">Kayıt Ölçülerini Düzenle</h4>
                     <div id="konumSliderListesi"></div>
                 </div>
 
@@ -1714,11 +1713,24 @@
                     <div id="bolmeListesi"></div>
                 </div>
 
-                <label style="font-size:11px; font-weight:bold;">Profil Rengi</label>
-                <select id="f_renk" onchange="cizimGuncelle()" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px;">
+                <label style="font-size:11px; font-weight:bold;">Profil Rengi (Laminasyon)</label>
+                <select id="f_renk" onchange="cizimGuncelle()" style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:1px solid #ccc; background: white;">
                     <option value="1" data-hex="#ffffff">Beyaz</option>
-                    <option value="1.25" data-hex="#333333">Antrasit</option>
-                    <option value="1.20" data-hex="#5d4037">Altın Meşe</option>
+                    <option value="1.25" data-hex="#333333">Antrasit Gri</option>
+                    <option value="1.20" data-hex="#855E42">Açık Ceviz</option>
+                    <option value="1.20" data-hex="#B69B4C">Açık Meşe</option>
+                    <option value="1.20" data-hex="#9B711F">Altın Meşe</option>
+                    <option value="1.20" data-hex="#A65E2E">Armut</option>
+                    <option value="1.20" data-hex="#808080">Gri</option>
+                    <option value="1.25" data-hex="#A52A2A">Kırmızı</option>
+                    <option value="1.20" data-hex="#5C2A2A">Kızıl Ceviz</option>
+                    <option value="1.20" data-hex="#3D2B1F">Koyu Ceviz</option>
+                    <option value="1.20" data-hex="#4A3728">Koyu Meşe</option>
+                    <option value="1.25" data-hex="#004225">Koyu Yeşil</option>
+                    <option value="1.15" data-hex="#FFFDD0">Krem</option>
+                    <option value="1.20" data-hex="#4A0404">Maun</option>
+                    <option value="1.20" data-hex="#8B4513">Meşe</option>
+                    <option value="1.30" data-hex="#2C2C2C">Siyah Füme</option>
                 </select>
 
                 <div style="background: #28a745; color: white; padding: 20px; border-radius: 12px; text-align: center;">
@@ -1738,7 +1750,6 @@
             const dAdet = parseInt(document.getElementById('f_d_adet').value) || 0;
             const yAdet = parseInt(document.getElementById('f_y_adet').value) || 0;
 
-            // 1. Kayıt Sliderlarını Oluştur
             let sList = document.getElementById('konumSliderListesi');
             sList.innerHTML = "";
             for(let i=1; i<=dAdet; i++) {
@@ -1750,7 +1761,6 @@
                 sList.innerHTML += `<div style="margin-top:10px;"><label style="font-size:10px;">Yatay Kayıt ${j}: <b id="yv_${j}">${v}</b> cm</label><input type="range" id="ys_${j}" min="15" max="${h-15}" value="${v}" oninput="document.getElementById('yv_${j}').innerText=this.value; cizimGuncelle();" style="width:100%; accent-color:#4caf50;"></div>`;
             }
 
-            // 2. Açılım Listesini Oluştur
             let bList = document.getElementById('bolmeListesi');
             bList.innerHTML = "";
             const toplamBolme = (dAdet + 1) * (yAdet + 1);
@@ -1779,30 +1789,32 @@
             const h = parseFloat(document.getElementById('f_h').value) || 0;
             const dAdet = parseInt(document.getElementById('f_d_adet').value) || 0;
             const yAdet = parseInt(document.getElementById('f_y_adet').value) || 0;
-            const renkHex = document.getElementById('f_renk').options[document.getElementById('f_renk').selectedIndex].getAttribute('data-hex');
+            const renkSelect = document.getElementById('f_renk');
+            const renkHex = renkSelect.options[renkSelect.selectedIndex].getAttribute('data-hex');
+            const renkAd = renkSelect.options[renkSelect.selectedIndex].text;
 
-            // Kayıt Konumlarını Al
+            document.getElementById('renkBilgi').innerText = renkAd;
+            document.getElementById('seriBilgi').innerText = document.getElementById('f_seri').options[document.getElementById('f_seri').selectedIndex].text.split('(')[0];
+
             let dPos = [0]; for(let i=1; i<=dAdet; i++) dPos.push(parseFloat(document.getElementById('ds_'+i).value)); dPos.push(w);
             let yPos = [0]; for(let j=1; j<=yAdet; j++) yPos.push(parseFloat(document.getElementById('ys_'+j).value)); yPos.push(h);
             dPos.sort((a,b)=>a-b); yPos.sort((a,b)=>a-b);
 
-            // Çizim Boyutlandırma
             let maxDim = 420; let oran = maxDim / Math.max(w, h);
             let cerceve = document.getElementById('pencereCerceve');
-            cerceve.style.width = (w * oran) + "px"; cerceve.style.height = (h * oran) + "px"; cerceve.style.borderColor = renkHex;
+            cerceve.style.width = (w * oran) + "px"; cerceve.style.height = (h * oran) + "px"; 
+            cerceve.style.borderColor = renkHex;
 
-            // Bölmeleri ve Açılımları Çiz
             const bCont = document.getElementById('bolmeContainer'); bCont.innerHTML = "";
             let bIndex = 0;
             let kanatMaliyeti = 0;
 
-            // Yatay bölmeler yukardan aşağı (yPos tersten gidilmeli teknik olarak ama kolaylık için grid mantığı)
             for(let r=0; r < yPos.length-1; r++) {
                 for(let c=0; c < dPos.length-1; c++) {
                     let bW = dPos[c+1] - dPos[c];
                     let bH = yPos[r+1] - yPos[r];
                     let bX = dPos[c];
-                    let bY = h - yPos[r+1]; // Alttan ölçü sistemi
+                    let bY = h - yPos[r+1];
 
                     let div = document.createElement('div');
                     div.style.cssText = `position:absolute; left:${(bX/w)*100}%; top:${(bY/h)*100}%; width:${(bW/w)*100}%; height:${(bH/h)*100}%; border:1px solid rgba(255,255,255,0.2); overflow:hidden;`;
@@ -1817,7 +1829,6 @@
                 }
             }
 
-            // Kayıt Çizgilerini Çiz
             const kCont = document.getElementById('kayitlarContainer'); kCont.innerHTML = "";
             for(let i=1; i<dPos.length-1; i++) {
                 let l = document.createElement('div');
@@ -1830,7 +1841,6 @@
                 kCont.appendChild(l);
             }
 
-            // Fiyat Hesapla
             let m2 = (w/100)*(h/100);
             let seriFiyat = parseFloat(document.getElementById('f_seri').value);
             let toplam = ((m2 * seriFiyat) + ( (dAdet+yAdet)*350 ) + kanatMaliyeti) * parseFloat(document.getElementById('f_renk').value);
