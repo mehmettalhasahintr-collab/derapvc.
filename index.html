@@ -776,6 +776,35 @@
 
     @media (max-width: 1024px) { .news-grid-system { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 600px) { .news-grid-system { grid-template-columns: 1fr; } }
+    /* İSTATİSTİK BÖLÜMÜ MOBİL DÜZENİ */
+@media (max-width: 768px) {
+    .dera-stats-grid {
+        display: flex !important;
+        flex-direction: row !important; /* Yan yana diz */
+        overflow-x: auto !important;    /* Kaydırmayı aç */
+        scroll-snap-type: x mandatory;
+        padding: 20px 10px !important;
+        gap: 15px !important;
+        justify-content: flex-start !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .dera-stat-item {
+        min-width: 200px !important; /* Her kartın genişliği */
+        flex: 0 0 auto !important;
+        scroll-snap-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1) !important;
+    }
+
+    /* Alttaki kaydırma çubuğunu şık yapalım */
+    .dera-stats-grid::-webkit-scrollbar {
+        height: 5px;
+    }
+    .dera-stats-grid::-webkit-scrollbar-thumb {
+        background: #cc0000;
+        border-radius: 10px;
+    }
+}
 </style>
 
 <style>
