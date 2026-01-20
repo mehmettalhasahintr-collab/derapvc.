@@ -498,28 +498,51 @@
     </style>
 </head>
 <body>
-    <header>
-        <img src="https://derapvc.com.tr/tema/dera/img/logo.png" alt="DERA PVC Logo" id="mainLogo" onclick="showContent('anasayfa')">
-        <button class="menu-toggle" id="menuToggle">&#9776;</button>
-        <ul class="dropdown-menu" id="dropdownMenu">
-            <li id="firma-profili-li">
-                <a href="#" onclick="showContent('hakkimizda'); return false;">Firma Profili &#9658;</a>
-                <ul class="sub-menu">
-                    <li><a href="#" onclick="showContent('hakkimizda'); return false;">Hakkımızda</a></li>
-                    <li><a href="#" onclick="showContent('hakkimizda'); return false;">Misyon ve Vizyon</a></li>
-                </ul>
-            </li>
-            <li><a href="#urunler" onclick="showContent('urunler'); showProductCategory('pvc'); return false;">Ürünler</a></li>
-            <li><a href="#haberler" onclick="showContent('haberler'); showNewsDetail('haber1'); return false;">Haberler</a></li>
-            <li><a href="#referanslar" onclick="showContent('referanslar'); return false;">Referanslarımız</a></li>
-            <li><a href="#bayiler" onclick="showContent('bayiler'); return false;">Bayilerimiz</a></li>
-            <li><a href="#iletişim" onclick="showContent('iletisim'); return false;">İletişim</a></li>
-            <li><a href="#fiyat" onclick="showContent('fiyat'); return false;">Fiyat</a></li>
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; background: #fff; position: relative; border-bottom: 3px solid #cc0000; box-sizing: border-box; min-height: 100px;">
+        
+        <img src="https://derapvc.com.tr/tema/dera/img/logo.png" alt="DERA PVC Logo" id="mainLogo" onclick="showContent('anasayfa')" style="cursor: pointer; display: block; max-height: 70px; width: auto;">
 
-                </a>
+        <button class="menu-toggle" id="menuToggle" onclick="deraAcKapat()" style="background: #cc0000; color: white; border: none; width: 48px; height: 48px; border-radius: 8px; font-size: 26px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">&#9776;</button>
+
+        <ul class="dropdown-menu" id="dropdownMenu" style="position: absolute; top: 100%; right: 30px; width: 220px; background: #fff; border: 1px solid #ddd; border-top: none; box-shadow: 0 10px 25px rgba(0,0,0,0.1); list-style: none; padding: 0; margin: 0; display: none; z-index: 999999;">
+            
+            <li style="border-bottom: 1px solid #eee;">
+                <a href="#" onclick="showContent('hakkimizda'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 700;">Firma Profili</a>
             </li>
+
+            <li style="border-bottom: 1px solid #eee;"><a href="#urunler" onclick="showContent('urunler'); showProductCategory('pvc'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">Ürünler</a></li>
+            <li style="border-bottom: 1px solid #eee;"><a href="#haberler" onclick="showContent('haberler'); showNewsDetail('haber1'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">Haberler</a></li>
+            <li style="border-bottom: 1px solid #eee;"><a href="#referanslar" onclick="showContent('referanslar'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">Referanslarımız</a></li>
+            <li style="border-bottom: 1px solid #eee;"><a href="#bayiler" onclick="showContent('bayiler'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">Bayilerimiz</a></li>
+            <li style="border-bottom: 1px solid #eee;"><a href="#iletişim" onclick="showContent('iletisim'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">İletişim</a></li>
+            <li><a href="#fiyat" onclick="showContent('fiyat'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">Fiyat</a></li>
         </ul>
     </header>
+
+    <script>
+        // Menü Aç/Kapat
+        function deraAcKapat() {
+            var menu = document.getElementById('dropdownMenu');
+            var btn = document.getElementById('menuToggle');
+            if (menu.style.display === 'block') {
+                menu.style.display = 'none';
+                btn.innerHTML = '&#9776;';
+            } else {
+                menu.style.display = 'block';
+                btn.innerHTML = '&times;';
+            }
+        }
+
+        // Dışarı tıklayınca kapatma
+        window.addEventListener('click', function(e) {
+            var menu = document.getElementById('dropdownMenu');
+            var btn = document.getElementById('menuToggle');
+            if (e.target !== btn && !btn.contains(e.target)) {
+                menu.style.display = 'none';
+                btn.innerHTML = '&#9776;';
+            }
+        });
+    </script>
     <div id="anasayfa" class="content-section home-active">
 
         <div id="banner-wrapper" style="position: relative; width: 100%; height: 550px; background: #000; overflow: hidden;">
