@@ -498,26 +498,39 @@
     </style>
 </head>
 <body>
-    <header style="display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; background: #fff; position: relative; border-bottom: 3px solid #cc0000; box-sizing: border-box; min-height: 100px;">
+    <header style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 15px 30px; background: #fff; position: relative; border-bottom: 3px solid #cc0000; box-sizing: border-box; min-height: 100px;">
         
+    <div style="display: flex; justify-content: flex-start;">
         <img src="https://derapvc.com.tr/tema/dera/img/logo.png" alt="DERA PVC Logo" id="mainLogo" onclick="showContent('anasayfa')" style="cursor: pointer; display: block; max-height: 70px; width: auto;">
+    </div>
 
-        <button class="menu-toggle" id="menuToggle" onclick="deraAcKapat()" style="background: #cc0000; color: white; border: none; width: 48px; height: 48px; border-radius: 8px; font-size: 26px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">&#9776;</button>
+    <div style="display: flex; justify-content: center;">
+        <div id="google_translate_element" style="display:none;"></div>
+        <select id="deraDilSecici" onchange="translatePage(this.value)" style="background: #fff; color: #333; border: 2px solid #cc0000; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; outline: none; font-size: 14px;">
+            <option value="">🌍 DİL SEÇİN</option>
+            <option value="tr">🇹🇷 Türkçe</option>
+            <option value="en">🇺🇸 English</option>
+            <option value="sq">🇦🇱 Shqip (Arnavutça)</option>
+            <option value="de">🇩🇪 Deutsch</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="ru">🇷🇺 Русский</option>
+        </select>
+    </div>
 
-        <ul class="dropdown-menu" id="dropdownMenu" style="position: absolute; top: 100%; right: 30px; width: 220px; background: #fff; border: 1px solid #ddd; border-top: none; box-shadow: 0 10px 25px rgba(0,0,0,0.1); list-style: none; padding: 0; margin: 0; display: none; z-index: 999999;">
-            
-            <li style="border-bottom: 1px solid #eee;">
-                <a href="#" onclick="showContent('hakkimizda'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 700;">Firma Profili</a>
-            </li>
+    <div style="display: flex; justify-content: flex-end;">
+        <button class="menu-toggle" onclick="deraAcKapat()" style="background: #cc0000; color: white; border: none; width: 48px; height: 48px; border-radius: 8px; font-size: 26px; cursor: pointer;">&#9776;</button>
+    </div>
 
-            <li style="border-bottom: 1px solid #eee;"><a href="#urunler" onclick="showContent('urunler'); showProductCategory('pvc'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">Ürünler</a></li>
-            <li style="border-bottom: 1px solid #eee;"><a href="#haberler" onclick="showContent('haberler'); showNewsDetail('haber1'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">Haberler</a></li>
-            <li style="border-bottom: 1px solid #eee;"><a href="#referanslar" onclick="showContent('referanslar'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">Referanslarımız</a></li>
-            <li style="border-bottom: 1px solid #eee;"><a href="#bayiler" onclick="showContent('bayiler'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">Bayilerimiz</a></li>
-            <li style="border-bottom: 1px solid #eee;"><a href="#iletişim" onclick="showContent('iletisim'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">İletişim</a></li>
-            <li><a href="#fiyat" onclick="showContent('fiyat'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">Fiyat</a></li>
-        </ul>
-    </header>
+    <ul class="dropdown-menu" id="dropdownMenu" style="position: absolute; top: 100%; right: 30px; width: 220px; background: #fff; border: 1px solid #ddd; display: none; z-index: 999999; list-style: none; padding: 0; margin: 0; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+        <li style="border-bottom: 1px solid #eee;"><a href="#" onclick="showContent('hakkimizda'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 700;">Firma Profili</a></li>
+        <li style="border-bottom: 1px solid #eee;"><a href="#urunler" onclick="showContent('urunler'); showProductCategory('pvc'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">Ürünler</a></li>
+        <li style="border-bottom: 1px solid #eee;"><a href="#haberler" onclick="showContent('haberler'); showNewsDetail('haber1'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">Haberler</a></li>
+        <li style="border-bottom: 1px solid #eee;"><a href="#referanslar" onclick="showContent('referanslar'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">Referanslarımız</a></li>
+        <li style="border-bottom: 1px solid #eee;"><a href="#bayiler" onclick="showContent('bayiler'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">Bayilerimiz</a></li>
+        <li style="border-bottom: 1px solid #eee;"><a href="#iletişim" onclick="showContent('iletisim'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">İletişim</a></li>
+        <li><a href="#fiyat" onclick="showContent('fiyat'); deraAcKapat(); return false;" style="display: block; padding: 13px 20px; color: #333; text-decoration: none; font-size: 14px; font-weight: 600;">Fiyat</a></li>
+    </ul>
+</header>
 
     <script>
         // Menü Aç/Kapat
@@ -2589,6 +2602,120 @@ window.addEventListener('load', function() {
 });
 </script>
 
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'tr',
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+
+    // Senin seçtiğin dili Google motoruna gönderen fonksiyon
+    function translatePage(langCode) {
+        var selectField = document.querySelector("select.goog-te-combo");
+        if (selectField) {
+            selectField.value = langCode;
+            selectField.dispatchEvent(new Event('change'));
+        }
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<style>
+    /* Google'ın tepedeki tüm kalıntılarını temizle */
+    .goog-te-banner-frame.skiptranslate, .goog-te-gadget-icon { display: none !important; }
+    body { top: 0px !important; }
+    .goog-te-balloon-frame { display: none !important; }
+    font { background-color: transparent !important; box-shadow: none !important; }
+</style>
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'tr',
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+
+    function translatePage(langCode) {
+        if (!langCode) return;
+
+        // Google'ın asıl gizli kutusunu bulana kadar deneme yapan fonksiyon
+        var checkInterval = setInterval(function() {
+            var googleSelect = document.querySelector("select.goog-te-combo");
+            
+            if (googleSelect) {
+                googleSelect.value = langCode;
+                googleSelect.dispatchEvent(new Event('change'));
+                clearInterval(checkInterval); // Bulunca aramayı durdur
+            }
+        }, 100); // Her 100 milisaniyede bir kontrol et (çok hızlıdır)
+
+        // 5 saniye boyunca bulamazsa vazgeç (sonsuz döngü olmasın)
+        setTimeout(function() {
+            clearInterval(checkInterval);
+        }, 5000);
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<style>
+    /* Çirkinlikleri temizleyen CSS aynen kalıyor */
+    iframe.goog-te-banner-frame { display: none !important; }
+    .goog-te-banner-frame.skiptranslate { display: none !important; }
+    body { top: 0px !important; }
+    .goog-te-balloon-frame { display: none !important; }
+    font { background-color: transparent !important; box-shadow: none !important; }
+    .goog-logo-link { display: none !important; }
+    .goog-te-gadget { color: transparent !important; font-size: 0 !important; }
+</style>
+
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'tr',
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+
+    function translatePage(langCode) {
+        if (!langCode) return;
+        var googleSelect = document.querySelector("select.goog-te-combo");
+        if (googleSelect) {
+            googleSelect.value = langCode;
+            googleSelect.dispatchEvent(new Event('change'));
+        } else {
+            // Eğer Google henüz yüklenmediyse 1 saniye bekleyip tekrar dene
+            setTimeout(function() { translatePage(langCode); }, 1000);
+        }
+    }
+
+    // TEKMEDE BARIN ÇIKMASINI ENGELLEYEN BEKÇİ (Interval)
+    setInterval(function() {
+        // 1. Tepedeki barı bul ve yok et
+        var googleBar = document.querySelector(".goog-te-banner-frame");
+        if (googleBar) {
+            googleBar.style.display = 'none';
+            googleBar.style.visibility = 'hidden';
+        }
+        // 2. Body'deki kaymayı sıfırla
+        document.body.style.top = "0px";
+        document.body.style.marginTop = "0px";
+    }, 10); // Her 10 milisaniyede bir kontrol eder, barın çıkmasına fırsat vermez
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<style>
+    /* CSS ile de garantiye alalım */
+    .goog-te-banner-frame { display: none !important; visibility: hidden !important; }
+    .goog-te-banner { display: none !important; }
+    .skiptranslate { display: none !important; }
+    body { top: 0px !important; position: static !important; }
+    .goog-te-balloon-frame { display: none !important; }
+    font { background-color: transparent !important; box-shadow: none !important; }
+    #goog-gt-tt { display: none !important; }
+</style>
 
 
 </body>
