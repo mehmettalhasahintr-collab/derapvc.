@@ -1288,198 +1288,176 @@
             Değişim ve gelişime açık; güvenilir ve sürekli kendini geliştiren; araştırmacı ve yenilikçi, esnek, hızlı ve çevik yapısıyla dengeleri değiştirebilen ve kriterleri belirleyen; müşteri beklenti ve memnuniyetine önem veren; sattığı ürün ve hizmete satış sonrasında da sahip çıkarak sonuna kadar tam destek veren; devamlı ve sağlıklı büyüyerek, araştırma ve maliyet düşürücü projelerle rekabet gücünü sürekli geliştiren; müşterileri, tedarikçileri, sermaye sahipleri, diğer iş ortakları ve en önemlisi de çalışanları ile bir ekip ruhuyla yüksek katma değer oluşturarak bunun adil paylaşımına önem veren; pazarın tüm dünya olduğu bilinciyle hareket eden; uluslararası standartlarda daima aranılan ürün ve hizmet sunmayı kendisine prensip edinmiş; iyi eğitilmiş, tam donanımlı, yetenekli, katılımcı ve üst düzeyde motive olmuş çalışanlara sahip **bir firma olmak.**
         </p>
     </section>
-<section id="urunler" class="content-section about-section">
-    <h2>Ürünlerimiz</h2>
+<style>
+    :root { --dera-red: #cc0000; --dark: #1a1a1a; --gray: #f8f8f8; --border: #eee; }
+    #urun-sistemi { font-family: 'Poppins', sans-serif; padding: 40px 5%; color: #333; }
 
-    <nav class="product-nav" id="productCategoryNav">
-        <button id="pvcButton" class="active" onclick="showProductCategory('pvc')">PVC Kapı Pencere Sistemleri</button>
-        <button id="alternativeButton" onclick="showProductCategory('alternative')">Alternatif Sistemler</button>
-    </nav>
+    /* --- VİTRİN --- */
+    .vitrin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+    .vitrin-kart { border: 1px solid var(--border); border-radius: 12px; padding: 15px; text-align: center; cursor: pointer; transition: 0.3s; background: #fff; }
+    .vitrin-kart:hover { transform: translateY(-5px); border-color: var(--dera-red); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .vitrin-kart img { width: 100%; height: 160px; object-fit: contain; margin-bottom: 10px; }
+    .vitrin-kart h3 { font-size: 15px; font-weight: 700; color: var(--dark); margin: 0; }
 
-    <div id="pvc-systems" class="product-category active">
-        <nav class="product-sub-category" id="pvcSubNav">
-            <button id="pro7006Button" class="active" onclick="showProductSeries('pro7006')">PRO7006</button>
-            <button id="pro8106Button" onclick="showProductSeries('pro8106')">PRO8106</button>
-            <button id="konigButton" onclick="showProductSeries('konig')">König Seri</button>
-            <button id="newSlidingButton" onclick="showProductSeries('newSliding')">Yeni Sürme</button>
-        </nav>
+    /* --- AYRINTILI SAYFA GENEL --- */
+    #detay-sayfasi { display: none; animation: fadeIn 0.4s ease-in-out; }
+    .ust-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid var(--border); padding-bottom: 15px; }
+    .geri-btn { color: var(--dera-red); font-weight: 700; cursor: pointer; text-decoration: none; font-size: 14px; }
+    .bolum-baslik { margin: 40px 0 20px; padding-left: 15px; border-left: 5px solid var(--dera-red); font-size: 20px; font-weight: 800; }
 
-        <div class="product-content-area" id="pvc-content-area">
-            <div id="pro7006" class="product-series-content active">
-                <h3>PRO7006 SERİSİ (ULTRA SERİ)</h3>
-                <div class="series-content-details">
-                    <div class="product-series-image">
-                        <img src="https://www.derapvc.com.tr/user/files/178896.PNG" alt="PRO7006 PVC Profil Kesiti">
-                    </div>
-                    <div class="product-series-text">
-                        <p class="tagline">TASARRUF İÇİN İDEAL...</p>
-                        <ul>
-                            <li>6 Odacıklı profil yapısı ve 48 mm'lik Yüksek kasası ile 7 Odacıklı Damlalıklı sistemi mükemmel birleştirir.</li>
-                            <li>70 mm kasa genişliği ile dünya standartlarında üretim.</li>
-                            <li>%100 su sızdırmazlığı ve mükemmel ses izolasyonu.</li>
-                        </ul>
-                        <div class="teknik-liste-kapsayici" style="margin-top:20px; background:#fff; padding:15px; border-left:5px solid #cc0000; border-radius:8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                            <h4 style="color:#cc0000; margin-top:0;">TEKNİK ÖZELLİKLER</h4>
-                            <ul style="list-style:none; padding:0; margin:10px 0 0 0; font-size:14px;">
-                                <li style="padding:6px 0; border-bottom:1px solid #eee;"><strong>Profil:</strong> 70 mm genişlik / 6 Odacık</li>
-                                <li style="padding:6px 0; border-bottom:1px solid #eee;"><strong>Cam:</strong> 4 mm'den 34 mm'ye kadar</li>
-                                <li style="padding:6px 0;"><strong>Yalıtım:</strong> Yeni nesil EPDM conta</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    /* --- PVC TASARIM --- */
+    .pvc-ust-kat { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+    .ana-gorsel-cerceve { background: var(--gray); border-radius: 15px; padding: 20px; text-align: center; display: flex; align-items: center; justify-content: center; height: 350px; }
+    .ana-gorsel-cerceve img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    
+    .pvc-alt-kat { display: grid; grid-template-columns: 1fr 1.2fr; gap: 30px; margin-bottom: 40px; }
+    .ekstra-resim-yeri { background: #fff; border: 1px solid #eee; border-radius: 15px; display: flex; align-items: center; justify-content: center; overflow: hidden; height: 350px; }
+    .ekstra-resim-yeri img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    
+    /* 3x3 RENK IZGARASI */
+    .renk-3x3-izgara { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .renk-birim { text-align: center; }
+    .renk-kare-kutu { aspect-ratio: 1; background: #ddd; border-radius: 8px; border: 1px solid #eee; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .renk-kare-kutu img { width: 100%; height: 100%; object-fit: cover; }
+    .renk-metin-etiket { font-size: 10px; margin-top: 5px; font-weight: 700; color: #555; text-transform: uppercase; }
 
-            <div id="pro8106" class="product-series-content" style="display:none;">
-                <h3>PRO8106 SERİSİ (SAFİR SERİ)</h3>
-                <div class="series-content-details">
-                    <div class="product-series-image">
-                        <img src="https://www.derapvc.com.tr/user/files/178897.png" alt="PRO8106 PVC Profil Kesiti">
-                    </div>
-                    <div class="product-series-text">
-                        <p class="tagline">SARAYLARA LAYIK TASARIM...</p>
-                        <ul>
-                            <li>Gerçek Bariyerli 3 contalı sistemi sayesinde en yüksek izolasyon.</li>
-                            <li>81 mm kasa genişliği ve 3 mm profil et kalınlığı.</li>
-                            <li>128 mm kasa-kanat yüksekliği ile daha geniş ve aydınlık görüş alanı.</li>
-                        </ul>
-                        <div class="teknik-liste-kapsayici" style="margin-top:20px; background:#fff; padding:15px; border-left:5px solid #cc0000; border-radius:8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                            <h4 style="color:#cc0000; margin-top:0;">TEKNİK ÖZELLİKLER</h4>
-                            <ul style="list-style:none; padding:0; margin:10px 0 0 0; font-size:14px;">
-                                <li style="padding:6px 0; border-bottom:1px solid #eee;"><strong>Profil:</strong> 81 mm genişlik / 3 mm et kalınlığı</li>
-                                <li style="padding:6px 0; border-bottom:1px solid #eee;"><strong>Sistem:</strong> 3 Bariyerli Conta</li>
-                                <li style="padding:6px 0;"><strong>Görüş:</strong> 128 mm ince hatlı tasarım</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    /* Teknik Alanlar & Tablo */
+    .teknik-metin-kutu { background: #fff; padding: 25px; border-left: 4px solid #ddd; margin-bottom: 25px; line-height: 1.7; background: var(--gray); border-radius: 0 10px 10px 0; }
+    .buyuk-cizelge { width: 100%; border-collapse: collapse; }
+    .buyuk-cizelge td { border: 1px solid #ddd; padding: 15px; font-size: 14px; width: 50%; }
+    .cizelge-etiket { background: #f2f2f2; font-weight: 700; color: var(--dark); }
 
-            <div id="konig" class="product-series-content" style="display:none;">
-                <h3>KÖNİG SERİ (YENİ NESİL)</h3>
-                <div class="series-content-details">
-                    <div class="product-series-image">
-                        <img src="https://www.derapvc.com.tr/user/files/164728.png" alt="König PVC Profil Kesiti">
-                    </div>
-                    <div class="product-series-text">
-                        <p class="tagline">GELECEĞİN PENCERE PROFİLLERİ...</p>
-                        <ul>
-                            <li>80 mm profil genişliği ve 6 odacıklı yapı ile maksimum direnç.</li>
-                            <li>3 contalı sistem ile kusursuz ısı ve ses yalıtımı.</li>
-                            <li>Yalnızca 1,2 w/m²k ısı geçirgenlik değeri ile üstün enerji tasarrufu.</li>
-                        </ul>
-                        <div class="teknik-liste-kapsayici" style="margin-top:20px; background:#fff; padding:15px; border-left:5px solid #cc0000; border-radius:8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                            <h4 style="color:#cc0000; margin-top:0;">TEKNİK ÖZELLİKLER</h4>
-                            <ul style="list-style:none; padding:0; margin:10px 0 0 0; font-size:14px;">
-                                <li style="padding:6px 0; border-bottom:1px solid #eee;"><strong>Genişlik:</strong> 80 mm / 3 Conta</li>
-                                <li style="padding:6px 0; border-bottom:1px solid #eee;"><strong>Odacık:</strong> 6 Odacıklı Kasa ve Kanat</li>
-                                <li style="padding:6px 0;"><strong>Renk:</strong> Hot Melt Lamine Seçenekleri</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    /* Kayan Kesitler */
+    .kayan-resimler-kapsayici { overflow-x: auto; display: flex; gap: 15px; padding: 15px 0; scrollbar-width: thin; }
+    .kesit-kare { min-width: 170px; height: 170px; background: #fff; border: 1px solid var(--border); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+    .kesit-kare img { max-width: 90%; max-height: 90%; object-fit: contain; }
 
-            <div id="newSliding" class="product-series-content" style="display:none;">
-                <h3>YENİ SÜRME SİSTEMLERİ</h3>
-                <div class="series-content-details">
-                    <div class="product-series-image">
-                        <img src="https://www.derapvc.com.tr/user/files/69090.jpg" alt="Sürme Sistemleri">
-                    </div>
-                    <div class="product-series-text">
-                        <p class="tagline">MEKANLARDA HAREKET ÖZGÜRLÜĞÜ...</p>
-                        <ul>
-                            <li>Dar alanlar için dekoratif ve pratik çözümler sunar.</li>
-                            <li>Özel fırça contaları sayesinde sızdırmazlık sağlar.</li>
-                            <li>Tek ray ve çift ray eşikli sistem seçenekleri mevcuttur.</li>
-                        </ul>
-                        <div class="teknik-liste-kapsayici" style="margin-top:20px; background:#fff; padding:15px; border-left:5px solid #cc0000; border-radius:8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                            <h4 style="color:#cc0000; margin-top:0;">TEKNİK ÖZELLİKLER</h4>
-                            <ul style="list-style:none; padding:0; margin:10px 0 0 0; font-size:14px;">
-                                <li style="padding:6px 0; border-bottom:1px solid #eee;"><strong>Kalınlık:</strong> 3 mm profil et kalınlığı</li>
-                                <li style="padding:6px 0; border-bottom:1px solid #eee;"><strong>Uygulama:</strong> Tek ve Çift Cam imkanı</li>
-                                <li style="padding:6px 0;"><strong>Ray Sistemi:</strong> Eşikli / Eşiksiz Seçenekler</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 992px) { .pvc-ust-kat, .pvc-alt-kat { grid-template-columns: 1fr; } }
+</style>
+
+<div id="urun-sistemi">
+    <div id="vitrin-ekrani">
+        <h2 style="text-align:center; margin-bottom:40px; font-weight: 800; color:var(--dark);">ÜRÜN GRUPLARIMIZ</h2>
+        <div class="vitrin-grid" id="vitrin-liste"></div>
     </div>
 
-    <div id="alternative-systems" class="product-category" style="display:none;">
-        <nav class="product-sub-category" id="alternativeSubNav">
-            <button id="panjurButton" class="active" onclick="showAlternativeSeries('panjur')">Panjur</button>
-            <button id="cambalkonButton" onclick="showAlternativeSeries('cambalkon')">Cam Balkon</button>
-            <button id="sineklikButton" onclick="showAlternativeSeries('sineklik')">Sineklik</button>
-        </nav>
-
-        <div class="product-content-area" id="alternative-content-area">
-            <div id="panjur" class="alternative-series-content active">
-                <h3>MODERN PANJUR SİSTEMLERİ</h3>
-                <div class="series-content-details">
-                    <div class="product-series-image">
-                        <img src="https://www.derapvc.com.tr/user/files/69118.jpg" alt="Panjur Sistemleri">
-                    </div>
-                    <div class="product-series-text">
-                        <p class="tagline">GÜVENLİK VE KONFOR BİR ARADA...</p>
-                        <p>Manuel veya motorlu seçenekleriyle evinizi dış etkenlerden korurken tam gizlilik sağlar. Isı yalıtımına %25'e kadar ek katkıda bulunur.</p>
-                        <div class="teknik-liste-kapsayici" style="margin-top:20px; background:#fff; padding:15px; border-left:5px solid #cc0000; border-radius:8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                            <h4 style="color:#cc0000; margin-top:0;">TEKNİK ÖZELLİKLER</h4>
-                            <ul style="list-style:none; padding:0; margin:10px 0 0 0; font-size:14px;">
-                                <li style="padding:6px 0; border-bottom:1px solid #eee;"><strong>Kontrol:</strong> Kumandalı / Manuel Seçenekleri</li>
-                                <li style="padding:6px 0; border-bottom:1px solid #eee;"><strong>Renk:</strong> Tüm laminasyon renklerine uyumlu</li>
-                                <li style="padding:6px 0;"><strong>Koruma:</strong> Ses, Isı ve Güvenlik Bariyeri</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="cambalkon" class="alternative-series-content" style="display:none;">
-                <h3>PROFESYONEL CAM BALKON</h3>
-                <div class="series-content-details">
-                    <div class="product-series-image">
-                        <img src="https://www.derapvc.com.tr/user/files/70473.jpg" alt="Cam Balkon Sistemleri">
-                    </div>
-                    <div class="product-series-text">
-                        <p class="tagline">BALKONUNUZDA DÖRT MEVSİM KEYİF...</p>
-                        <p>Kayseri iklimine uygun, yüksek yalıtımlı cam balkon sistemleri. Estetik görünümü bozmadan balkonunuzu yaşam alanına dönüştürür.</p>
-                        <div class="teknik-liste-kapsayici" style="margin-top:20px; background:#fff; padding:15px; border-left:5px solid #cc0000; border-radius:8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                            <h4 style="color:#cc0000; margin-top:0;">ÖZELLİKLER</h4>
-                            <ul style="list-style:none; padding:0; margin:10px 0 0 0; font-size:14px;">
-                                <li style="padding:6px 0; border-bottom:1px solid #eee;"><strong>Cam Tipi:</strong> 8 mm - 10 mm Temperli Cam</li>
-                                <li style="padding:6px 0; border-bottom:1px solid #eee;"><strong>Profil:</strong> Isı Yalıtımlı Alüminyum</li>
-                                <li style="padding:6px 0;"><strong>Mekanizma:</strong> Paslanmaz Çelik Tekerlek Sistemi</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="sineklik" class="alternative-series-content" style="display:none;">
-                <h3>SİNEKLİK ÇÖZÜMLERİ</h3>
-                <div class="series-content-details">
-                    <div class="product-series-image">
-                        <img src="https://www.derapvc.com.tr/user/files/70475.jpg" alt="Sineklik Sistemleri">
-                    </div>
-                    <div class="product-series-text">
-                        <p class="tagline">KESİNTİSİZ HAVA, SIFIR HAŞERE...</p>
-                        <p>Plise, menteşeli ve sürme sineklik modellerimizle yaz aylarında kapı ve pencerelerinizi özgürce açın.</p>
-                        <div class="teknik-liste-kapsayici" style="margin-top:20px; background:#fff; padding:15px; border-left:5px solid #cc0000; border-radius:8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                            <h4 style="color:#cc0000; margin-top:0;">MODELLERİMİZ</h4>
-                            <ul style="list-style:none; padding:0; margin:10px 0 0 0; font-size:14px;">
-                                <li style="padding:6px 0; border-bottom:1px solid #eee;"><strong>Plise:</strong> Akordiyon Katlanır Sistem</li>
-                                <li style="padding:6px 0; border-bottom:1px solid #eee;"><strong>Menteşeli:</strong> Ekonomik ve Pratik</li>
-                                <li style="padding:6px 0;"><strong>Tül:</strong> Yanmaz Fiberglas Tül</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div id="detay-sayfasi">
+        <div class="ust-nav">
+            <a href="javascript:void(0)" class="geri-btn" onclick="anaSayfayaDon()">← TÜM ÜRÜNLER</a>
+            <span id="ust-kategori-etiket" style="font-size: 11px; color: #999; font-weight: 800; letter-spacing: 1px;"></span>
         </div>
+        <div id="detay-dinamik-govde"></div>
+        <div class="bolum-baslik">Teknik Özellikler</div>
+        <div id="detay-teknik-metin" class="teknik-metin-kutu"></div>
+        <table class="buyuk-cizelge" id="detay-tablo"></table>
+        <div class="bolum-baslik">Kesit Resimleri</div>
+        <div class="kayan-resimler-kapsayici" id="kesit-galeri"></div>
     </div>
-</section>
+</div>
+
+<script>
+    const urunler = {
+        'pro7006': { 
+            cat: 'PVC SİSTEMLERİ', 
+            title: 'PRO7006 SERİSİ', 
+            img: 'https://www.derapvc.com.tr/user/files/178896.PNG', 
+            altImg: 'https://prolinepvc.com/storage/2220/pro7005-bilgiler.png',
+            type: 'pvc', 
+            genel: 'Yüksek katlı yapılar veya ısı ve ses yalıtımının önemli olduğu projeler için tasarlanmıştır aynı zamanda dekoratif görünümü ve emsallerinden çok daha zarif tasarımı sayesinde göze de hitap etmektedir. Mekânlarınızla bütünlük sağlar ve değer katar.', 
+            teknik: 'Isı İletkenlik Kat Sayısı Uf: 1.3 W/m2K', 
+            tablo: [['Profil Genişliği','70 mm'],['Odacık Sayısı','5'],['Conta Sayısı','2'],['Conta Tipi','TPE Gri / Siyah'],['Çıta','Tek Tırnaklı – TPE Contalı'],['Cam Kalınlıkları','4, 20, 24, 26, 30, 32 mm'],['Standart','TS 5358 – EN 12608-B Sınıfı']],
+            kesitler: [
+                "https://prolinepvc.com/storage/1831/pro711.png", "https://prolinepvc.com/storage/1830/pro710.png", 
+                "https://prolinepvc.com/storage/1834/pro714.png", "https://prolinepvc.com/storage/1832/pro712.png", 
+                "https://prolinepvc.com/storage/1833/pro713.png", "https://prolinepvc.com/storage/1835/pro715.png", 
+                "https://prolinepvc.com/storage/1835/pro715.png", "https://prolinepvc.com/storage/1836/pro716.png"
+            ],
+            laminasyon: [
+                {n: "Ceviz", img: "https://prolinepvc.com/storage/1356/walnut-ceviz.jpg"},
+                {n: "Altın Meşe", img: "https://prolinepvc.com/storage/1355/solar-oak-altin-mese.jpg"},
+                {n: "Maun", img: "https://prolinepvc.com/storage/1354/mahogany-maun.jpg"},
+                {n: "Koyu Kahve", img: "https://prolinepvc.com/storage/1353/dark-brown-koyu-kahve.jpg"},
+                {n: "Antrasit", img: "https://prolinepvc.com/storage/1352/anthracite-antrasit.jpg"},
+                {n: "Yosun Yeşili", img: "https://prolinepvc.com/storage/1351/Moss_Green-yosun_yesili.jpg"},
+                {n: "Mersey Meşe", img: "https://prolinepvc.com/storage/1350/Mersey_Oak-Mersey-mese.jpg"},
+                {n: "Titanyum Gümüş", img: "https://prolinepvc.com/storage/1349/Titanium_Silver-titanyum-gumus.jpg"},
+                {n: "Çinko Gümüş", img: "https://prolinepvc.com/storage/1348/Zinc_Silver-Cinko-gumus.jpg"}
+            ]
+        },
+        'pro8106': { cat: 'PVC SİSTEMLERİ', title: 'PRO8106 SERİSİ', img: 'https://www.derapvc.com.tr/user/files/178897.png', type: 'pvc', genel: '81 mm genişlik ve 3 bariyerli orta conta sistemi.', teknik: 'A sınıfı.', tablo: [['Genişlik','81 mm']] },
+        'konig': { cat: 'PVC SİSTEMLERİ', title: 'KÖNİG SERİ', img: 'https://www.derapvc.com.tr/user/files/164728.png', type: 'pvc', genel: 'Modern tasarım.', teknik: 'Yüksek statik.', tablo: [['Genişlik','80 mm']] },
+        'newSliding': { cat: 'PVC SİSTEMLERİ', title: 'YENİ SÜRME', img: 'https://www.derapvc.com.tr/user/files/69090.jpg', type: 'pvc', genel: 'Dar mekanlar.', teknik: 'Fırça ve conta.', tablo: [['Tip','Sürme']] },
+        'panjur': { cat: 'SİSTEMLER', title: 'MODERN PANJUR', img: 'https://www.derapvc.com.tr/user/files/69118.jpg', type: 'pvc', genel: 'Güvenlik.', teknik: 'Poliüretan.', tablo: [['Lamel','Alüminyum']] },
+        'cambalkon': { cat: 'SİSTEMLER', title: 'CAM BALKON', img: 'https://www.derapvc.com.tr/user/files/70473.jpg', type: 'showroom', genel: 'Dört mevsim.', teknik: 'Temperli cam.', tablo: [['Cam','8mm']] },
+        'sineklik': { cat: 'SİSTEMLER', title: 'SİNEKLİK', img: 'https://www.derapvc.com.tr/user/files/70475.jpg', type: 'showroom', genel: 'Pratik çözümler.', teknik: 'Yırtılmaz tül.', tablo: [['Model','Plise']] }
+    };
+
+    const vitrin = document.getElementById('vitrin-liste');
+    Object.keys(urunler).forEach(key => {
+        vitrin.innerHTML += `<div class="vitrin-kart" onclick="sayfaAc('${key}')"><img src="${urunler[key].img}"><h3>${urunler[key].title}</h3></div>`;
+    });
+
+    function sayfaAc(id) { window.location.hash = id; guncelle(); window.scrollTo(0,0); }
+    function anaSayfayaDon() { window.location.hash = ''; guncelle(); }
+
+    function guncelle() {
+        const hash = window.location.hash.replace('#', '');
+        if(hash && urunler[hash]) {
+            const u = urunler[hash];
+            document.getElementById('vitrin-ekrani').style.display = 'none';
+            document.getElementById('detay-sayfasi').style.display = 'block';
+            document.getElementById('ust-kategori-etiket').innerText = u.cat;
+            document.getElementById('detay-teknik-metin').innerText = u.teknik;
+
+            let icerik = "";
+            if(u.type === 'pvc') {
+                let renklerHtml = "";
+                if(u.laminasyon) {
+                    u.laminasyon.forEach(item => {
+                        renklerHtml += `<div class="renk-birim"><div class="renk-kare-kutu"><img src="${item.img}"></div><div class="renk-metin-etiket">${item.n}</div></div>`;
+                    });
+                }
+                
+                let altResimHtml = u.altImg ? `<img src="${u.altImg}">` : "DETAY RESMİ";
+
+                icerik = `
+                    <div class="pvc-ust-kat">
+                        <div class="ana-gorsel-cerceve"><img src="${u.img}"></div>
+                        <div class="genel-bilgi-metni">
+                            <h2 style="margin-top:0; color:var(--dera-red);">${u.title}</h2>
+                            <p style="font-size:17px; line-height:1.8;">${u.genel}</p>
+                        </div>
+                    </div>
+                    <div class="pvc-alt-kat">
+                        <div class="ekstra-resim-yeri">${altResimHtml}</div>
+                        <div class="renk-bolumu">
+                            <h4 style="margin:0 0 15px 0; font-weight:800;">Laminasyon Renkleri</h4>
+                            <div class="renk-3x3-izgara">${renklerHtml}</div>
+                        </div>
+                    </div>`;
+            } else {
+                icerik = `<div class="ozel-ust-bolum"><h2>${u.title}</h2><p>${u.genel}</p></div>`;
+            }
+            document.getElementById('detay-dinamik-govde').innerHTML = icerik;
+
+            let tHtml = "";
+            u.tablo.forEach(s => { tHtml += `<tr><td class="cizelge-etiket">${s[0]}</td><td>${s[1]}</td></tr>`; });
+            document.getElementById('detay-tablo').innerHTML = tHtml;
+
+            let kHtml = "";
+            if(u.kesitler) {
+                u.kesitler.forEach(src => { kHtml += `<div class="kesit-kare"><img src="${src}"></div>`; });
+            }
+            document.getElementById('kesit-galeri').innerHTML = kHtml;
+        } else {
+            document.getElementById('vitrin-ekrani').style.display = 'block';
+            document.getElementById('detay-sayfasi').style.display = 'none';
+        }
+    }
+    window.addEventListener('hashchange', guncelle);
+    window.onload = guncelle;
+</script>
     <section id="haberler" class="content-section about-section">
         <h2>Haberler</h2>
         
