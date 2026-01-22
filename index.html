@@ -498,27 +498,43 @@
     </style>
 </head>
 <body>
-    <header style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 15px 30px; background: #fff; position: relative; border-bottom: 3px solid #cc0000; box-sizing: border-box; min-height: 100px;">
-        
+    <style>
+    /* Masaüstü ve Genel Ayarlar */
+    header { z-index: 1000; }
+    #mainLogo { max-height: 70px; width: auto; transition: 0.3s; cursor: pointer; }
+    #deraDilSecici { background: #fff; color: #333; border: 2px solid #cc0000; padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; outline: none; font-size: 14px; }
+    
+    /* MOBİL AYARLAR: Ekran 768px'den küçükse */
+    @media (max-width: 768px) {
+        header { padding: 10px 15px !important; min-height: 80px !important; }
+        #mainLogo { max-height: 45px !important; }
+        #deraDilSecici { padding: 5px !important; font-size: 12px !important; width: 90px !important; }
+        .menu-toggle { width: 42px !important; height: 42px !important; font-size: 22px !important; }
+        .dropdown-menu { right: 10px !important; width: 190px !important; }
+    }
+</style>
+
+<header style="display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 15px 30px; background: #fff; position: relative; border-bottom: 3px solid #cc0000; box-sizing: border-box; min-height: 100px;">
+    
     <div style="display: flex; justify-content: flex-start;">
-        <img src="https://derapvc.com.tr/tema/dera/img/logo.png" alt="DERA PVC Logo" id="mainLogo" onclick="showContent('anasayfa')" style="cursor: pointer; display: block; max-height: 70px; width: auto;">
+        <img src="https://derapvc.com.tr/tema/dera/img/logo.png" alt="DERA PVC Logo" id="mainLogo" onclick="showContent('anasayfa')">
     </div>
 
     <div style="display: flex; justify-content: center;">
         <div id="google_translate_element" style="display:none;"></div>
-        <select id="deraDilSecici" onchange="translatePage(this.value)" style="background: #fff; color: #333; border: 2px solid #cc0000; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; outline: none; font-size: 14px;">
-            <option value="">🌍 DİL SEÇİN</option>
+        <select id="deraDilSecici" onchange="translatePage(this.value)">
+            <option value="">🌍 DİL</option>
             <option value="tr">🇹🇷 Türkçe</option>
             <option value="en">🇺🇸 English</option>
-            <option value="sq">🇦🇱 Shqip (Arnavutça)</option>
-            <option value="de">🇩🇪 Deutsch</option>
-            <option value="fr">🇫🇷 Français</option>
-            <option value="ru">🇷🇺 Русский</option>
+            <option value="sq">🇦🇱 Arnavutça</option>
+            <option value="de">🇩🇪 Almanca</option>
+            <option value="fr">🇫🇷 Fransızca</option>
+            <option value="ru">🇷🇺 Rusça</option>
         </select>
     </div>
 
     <div style="display: flex; justify-content: flex-end;">
-        <button class="menu-toggle" onclick="deraAcKapat()" style="background: #cc0000; color: white; border: none; width: 48px; height: 48px; border-radius: 8px; font-size: 26px; cursor: pointer;">&#9776;</button>
+        <button id="menuToggle" class="menu-toggle" onclick="deraAcKapat()" style="background: #cc0000; color: white; border: none; width: 48px; height: 48px; border-radius: 8px; font-size: 26px; cursor: pointer; display: flex; align-items: center; justify-content: center;">&#9776;</button>
     </div>
 
     <ul class="dropdown-menu" id="dropdownMenu" style="position: absolute; top: 100%; right: 30px; width: 220px; background: #fff; border: 1px solid #ddd; display: none; z-index: 999999; list-style: none; padding: 0; margin: 0; box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
@@ -532,30 +548,67 @@
     </ul>
 </header>
 
-    <script>
-        // Menü Aç/Kapat
-        function deraAcKapat() {
-            var menu = document.getElementById('dropdownMenu');
-            var btn = document.getElementById('menuToggle');
-            if (menu.style.display === 'block') {
+    <script type="text/javascript">
+    // 1. MENÜ AÇ/KAPAT (KESİN ÇÖZÜM)
+    function deraAcKapat() {
+        // Menü ve Butonu ID üzerinden yakalıyoruz (En garanti yol)
+        var menu = document.getElementById('dropdownMenu');
+        var btn = document.getElementById('menuToggle'); // HTML'de id="menuToggle" olduğundan emin ol
+        
+        // Eğer butonun ID'si yoksa veya farklıysa class üzerinden de yedek alalım
+        if(!btn) btn = document.querySelector('.menu-toggle');
+
+        if (menu.style.display === 'block') {
+            menu.style.display = 'none';
+            btn.innerHTML = '&#9776;'; // Hamburger
+        } else {
+            menu.style.display = 'block';
+            menu.style.zIndex = "999999"; // Üstte kalmasını garantile
+            btn.innerHTML = '&times;'; // Çarpı
+        }
+    }
+
+    // 2. DIŞARI TIKLAYINCA KAPANMA
+    window.addEventListener('click', function(e) {
+        var menu = document.getElementById('dropdownMenu');
+        var btn = document.getElementById('menuToggle') || document.querySelector('.menu-toggle');
+
+        // Tıklanan yer menü değilse VE buton değilse menüyü kapat
+        if (menu && btn && menu.style.display === 'block') {
+            if (!menu.contains(e.target) && !btn.contains(e.target)) {
                 menu.style.display = 'none';
                 btn.innerHTML = '&#9776;';
-            } else {
-                menu.style.display = 'block';
-                btn.innerHTML = '&times;';
             }
         }
+    });
 
-        // Dışarı tıklayınca kapatma
-        window.addEventListener('click', function(e) {
-            var menu = document.getElementById('dropdownMenu');
-            var btn = document.getElementById('menuToggle');
-            if (e.target !== btn && !btn.contains(e.target)) {
-                menu.style.display = 'none';
-                btn.innerHTML = '&#9776;';
-            }
-        });
-    </script>
+    // 3. GOOGLE TRANSLATE (DOKUNMA, ÇALIŞIYOR)
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'tr',
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+
+    function translatePage(langCode) {
+        if (!langCode) return;
+        var googleSelect = document.querySelector("select.goog-te-combo");
+        if (googleSelect) {
+            googleSelect.value = langCode;
+            googleSelect.dispatchEvent(new Event('change'));
+        } else {
+            setTimeout(function() { translatePage(langCode); }, 500);
+        }
+    }
+
+    // BAR SİLEN BEKÇİ
+    setInterval(function() {
+        var googleBar = document.querySelector(".goog-te-banner-frame");
+        if (googleBar) googleBar.style.display = 'none';
+        document.body.style.top = "0px";
+    }, 10);
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <div id="anasayfa" class="content-section home-active">
 
         <div id="banner-wrapper" style="position: relative; width: 100%; height: 550px; background: #000; overflow: hidden;">
@@ -2717,6 +2770,63 @@ window.addEventListener('load', function() {
     #goog-gt-tt { display: none !important; }
 </style>
 
+<script type="text/javascript">
+    // 1. Menü Aç/Kapat (Kesin Çalışan Versiyon)
+    function deraAcKapat() {
+        var menu = document.getElementById('dropdownMenu');
+        var btn = document.getElementById('menuToggle');
+        
+        if (menu.style.display === 'block') {
+            menu.style.display = 'none';
+            btn.innerHTML = '&#9776;';
+        } else {
+            menu.style.display = 'block';
+            btn.innerHTML = '&times;';
+        }
+    }
+
+    // 2. Dışarı Tıklayınca Kapatma (Mobil + Masaüstü)
+    document.addEventListener('mousedown', function(e) {
+        var menu = document.getElementById('dropdownMenu');
+        var btn = document.getElementById('menuToggle');
+        if (menu && menu.style.display === 'block') {
+            if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                menu.style.display = 'none';
+                btn.innerHTML = '&#9776;';
+            }
+        }
+    });
+
+    // 3. Google Translate Ayarları
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({
+            pageLanguage: 'tr',
+            autoDisplay: false
+        }, 'google_translate_element');
+    }
+
+    function translatePage(langCode) {
+        if (!langCode) return;
+        var checkExist = setInterval(function() {
+            var googleSelect = document.querySelector("select.goog-te-combo");
+            if (googleSelect) {
+                googleSelect.value = langCode;
+                googleSelect.dispatchEvent(new Event('change'));
+                clearInterval(checkExist);
+            }
+        }, 500);
+        // 10 saniye sonra denemeyi bırak
+        setTimeout(() => clearInterval(checkExist), 10000);
+    }
+
+    // Google Barını Yok Eden Bekçi
+    setInterval(function() {
+        var bar = document.querySelector(".goog-te-banner-frame");
+        if (bar) bar.style.display = "none";
+        document.body.style.top = "0px";
+    }, 100);
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
