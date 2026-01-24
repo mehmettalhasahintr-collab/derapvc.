@@ -1203,13 +1203,6 @@
         </div>
 
         <div class="dera-card">
-            <div class="dera-img-box"><img src="https://www.derapvc.com.tr/user/files/164728.png" alt="König" onerror="this.src='https://via.placeholder.com/250x200?text=KONIG+SERI'"></div>
-            <span class="dera-tag">Özel Tasarım</span>
-            <div class="dera-name">KÖNİG SERİ</div>
-            <a href="#urunler" target="_blank" class="dera-btn">İncele</a>
-        </div>
-
-        <div class="dera-card">
             <div class="dera-img-box"><img src="https://www.derapvc.com.tr/user/files/69090.jpg" alt="Sürme" onerror="this.src='https://via.placeholder.com/250x200?text=SURME+SISTEMLERI'"></div>
             <span class="dera-tag">Konforlu Geçiş</span>
             <div class="dera-name">YENİ SÜRME SİSTEMLERİ</div>
@@ -1254,6 +1247,7 @@
             <img src="https://derapvc.com.tr/tema/dera/img/logo.png" alt="Dera Logo">
             <img src="https://www.derapvc.com.tr/tema/dera/img/konig.png" alt="Konig Logo">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZ9LcWiyFE7tPwEsagHSYwyj_8wqGJfgmHGg&s" alt="Door-A Logo">
+            <img src="https://makrowin.biz/home/logo" alt="Makrowin Logo">
         </div>
     </div>
     <section id="hakkimizda" class="content-section about-section">
@@ -1475,20 +1469,46 @@
     </div>
 
     <script>
+        // Ürün göster fonksiyonu: URL'ye #urun-id ekler
         function urunGoster(id) {
-            document.getElementById('ana-vitrin').classList.add('gizli');
-            document.getElementById('vitrin-baslik').classList.add('gizli');
-            document.getElementById('urun-detay-paneli').style.display = 'block';
-            document.querySelectorAll('.detay-sayfasi').forEach(s => s.classList.add('gizli'));
-            document.getElementById('detay-' + id).classList.remove('gizli');
-            window.scrollTo({top: document.getElementById('urunler').offsetTop - 20, behavior: 'smooth'});
+            window.location.hash = id; 
         }
 
+        // Geri dön fonksiyonu: URL'deki hash'i temizler
         function vitrineDon() {
-            document.getElementById('urun-detay-paneli').style.display = 'none';
-            document.getElementById('ana-vitrin').classList.remove('gizli');
-            document.getElementById('vitrin-baslik').classList.remove('gizli');
+            window.location.hash = '';
         }
+
+        // URL'ye bakıp hangi sayfanın açık kalacağını belirleyen ana motor
+        function sayfaGuncelle() {
+            const hash = window.location.hash.replace('#', '');
+            const anaVitrin = document.getElementById('ana-vitrin');
+            const vitrinBaslik = document.getElementById('vitrin-baslik');
+            const detayPaneli = document.getElementById('urun-detay-paneli');
+            const tumSayfalar = document.querySelectorAll('.detay-sayfasi');
+
+            if (hash && document.getElementById('detay-' + hash)) {
+                // Eğer URL'de bir ürün id'si varsa onu göster
+                anaVitrin.classList.add('gizli');
+                vitrinBaslik.classList.add('gizli');
+                detayPaneli.style.display = 'block';
+                
+                tumSayfalar.forEach(s => s.classList.add('gizli'));
+                document.getElementById('detay-' + hash).classList.remove('gizli');
+                
+                // Sayfayı ürünün başına kaydır
+                window.scrollTo({top: document.getElementById('urunler').offsetTop - 20, behavior: 'smooth'});
+            } else {
+                // URL boşsa ana vitrine dön
+                detayPaneli.style.display = 'none';
+                anaVitrin.classList.remove('gizli');
+                vitrinBaslik.classList.remove('gizli');
+            }
+        }
+
+        // Sayfa ilk yüklendiğinde ve URL her değiştiğinde kontrol et
+        window.addEventListener('load', sayfaGuncelle);
+        window.addEventListener('hashchange', sayfaGuncelle);
     </script>
 </section>
     <section id="haberler" class="content-section about-section">
@@ -2182,6 +2202,7 @@
                     <li><a href="https://arikovanifiyatlari.com/" target="_blank">Dera Bee Arı Villaları</a></li>
                     <li><a href="https://arikovanifiyatlari.com/" target="_blank">König Panel Sistemleri</a></li>
                     <li><a href="https://www.door-a.com.tr/" target="_blank">Door-A Panel Sistemleri</a></li>
+                    <li><a href="https://makrowin.biz/" target="_blank">Makrowin PVC Sistemleri</a></li>
                 </ul>
             </div>
 
