@@ -520,19 +520,6 @@
         <img src="https://derapvc.com.tr/tema/dera/img/logo.png" alt="DERA PVC Logo" id="mainLogo" onclick="showContent('anasayfa')">
     </div>
 
-    <div style="display: flex; justify-content: center;">
-        <div id="google_translate_element" style="display:none;"></div>
-        <select id="deraDilSecici" onchange="translatePage(this.value)">
-            <option value="">🌍 DİL</option>
-            <option value="tr">🇹🇷 Türkçe</option>
-            <option value="en">🇺🇸 English</option>
-            <option value="sq">🇦🇱 Arnavutça</option>
-            <option value="de">🇩🇪 Almanca</option>
-            <option value="fr">🇫🇷 Fransızca</option>
-            <option value="ru">🇷🇺 Rusça</option>
-        </select>
-    </div>
-
     <div style="display: flex; justify-content: flex-end;">
         <button id="menuToggle" class="menu-toggle" onclick="deraAcKapat()" style="background: #cc0000; color: white; border: none; width: 48px; height: 48px; border-radius: 8px; font-size: 26px; cursor: pointer; display: flex; align-items: center; justify-content: center;">&#9776;</button>
     </div>
@@ -582,24 +569,6 @@
         }
     });
 
-    // 3. GOOGLE TRANSLATE (DOKUNMA, ÇALIŞIYOR)
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'tr',
-            autoDisplay: false
-        }, 'google_translate_element');
-    }
-
-    function translatePage(langCode) {
-        if (!langCode) return;
-        var googleSelect = document.querySelector("select.goog-te-combo");
-        if (googleSelect) {
-            googleSelect.value = langCode;
-            googleSelect.dispatchEvent(new Event('change'));
-        } else {
-            setTimeout(function() { translatePage(langCode); }, 500);
-        }
-    }
 
     // BAR SİLEN BEKÇİ
     setInterval(function() {
@@ -1298,14 +1267,17 @@
         <div class="urun-kart" onclick="urunGoster('pro7006')">
             <img src="https://i.hizliresim.com/17i6wjd.jpg">
             <h3>PRO7006 SERİSİ</h3>
+            <a href="www.derapvc.com.tr" target="_blank" class="dera-btn">PDF Broşür</a>
         </div>
         <div class="urun-kart" onclick="urunGoster('pro8106')">
             <img src="https://i.hizliresim.com/63441uv.jpg">
             <h3>PRO8106 SERİSİ</h3>
+            <a href="www.derapvc.com.tr" target="_blank" class="dera-btn">PDF Broşür</a>
         </div>
         <div class="urun-kart" onclick="urunGoster('surme')">
             <img src="https://prolinepvc.com/storage/2043/anagorsel_prosu%CC%88r-yalitimli-su%CC%88rme-serisi.jpg">
             <h3>PROSÜR YALITIMLI SÜRME</h3>
+            <a href="www.derapvc.com.tr" target="_blank" class="dera-btn">PDF Broşür</a>
         </div>
         <div class="urun-kart" onclick="urunGoster('cambalkon')">
             <img src="https://www.derapvc.com.tr/user/files/70473.jpg">
@@ -1732,6 +1704,7 @@
                 <div class="news-item-title" onclick="showNewsDetail('haber5')">2023 Yılında Zek İnşaatın Sivas Caddesindeki Zek Premiumu Yaptık Ve Teslim ettik</div>
                 <div class="news-item-title" onclick="showNewsDetail('haber6')">Dera PVC 2022 yıl başında DeraBee Markası ile üretimine başladığı Termo kovanlar ve 2024 Yılında İç ve Dış ticaret için kurmuş olduğu König İç ve Dış Tic.Ltd.Şti. İle Grup olma yolunda ilerlemeye devam ediyor.</div>
                 <div class="news-item-title" onclick="showNewsDetail('haber7')">16-18 Ocak 2026 Tarihleri arasında yapılacak olan Türkiye nin En büyük Arıcılık Fuarında Bizde Varız. Tüm dostlarımız Bekliyoruz.</div>
+                <div class="news-item-title" onclick="showNewsDetail('haber7')">16-18 Ocak 2026 Tarihleri arasında yapılacak olan Türkiye nin En büyük Arıcılık Fuarında Bizde Varız. Tüm dostlarımız Bekliyoruz.</div>
 
 
 
@@ -1803,6 +1776,15 @@
 
 
                 <div id="haber7" class="news-detail">
+                    <h3>16-18 Ocak 2026 Tarihleri arasında yapılacak olan Türkiye nin En büyük Arıcılık Fuarında Bizde Varız. Tüm dostlarımız Bekliyoruz.</h3>
+                    <div class="news-image-placeholder">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDEktu8-UnOZozJjBqsVh18s-cZ_Uhit4-Qg&s" alt="Haber">
+                    </div>
+                    <p>
+                    16-18 Ocak 2026 Tarihleri arasında yapılacak olan Türkiye nin En büyük Arıcılık Fuarında Bizde Varız. Tüm dostlarımız Bekliyoruz.
+                 </div>
+
+                 <div id="haber7" class="news-detail">
                     <h3>16-18 Ocak 2026 Tarihleri arasında yapılacak olan Türkiye nin En büyük Arıcılık Fuarında Bizde Varız. Tüm dostlarımız Bekliyoruz.</h3>
                     <div class="news-image-placeholder">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDEktu8-UnOZozJjBqsVh18s-cZ_Uhit4-Qg&s" alt="Haber">
